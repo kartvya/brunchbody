@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import RootNavigation from '../navigation/RootNavigation';
-import { persistor, store } from '../redux/store/store';
+import { persistor, store } from '../redux';
 
 export class RootContainer extends Component {
   render() {

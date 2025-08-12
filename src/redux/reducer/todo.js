@@ -22,14 +22,14 @@ const todoReducer = (state = initialState, action) => {
         ...state,
         todoTasks: [
           ...state.todoTasks,
-          {...action.payload, id: Math.random().toString(36).slice(2)},
+          { ...action.payload, id: Math.random().toString(36).slice(2) },
         ],
       };
     }
     case EDIT_TODO_TASK: {
       const temp = Array.from(state.todoTasks);
       const index = temp.findIndex(i => i.id === action.payload.id);
-      temp[index] = {...temp[index], ...action.payload.data};
+      temp[index] = { ...temp[index], ...action.payload.data };
 
       return {
         ...state,

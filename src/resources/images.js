@@ -1,9 +1,8 @@
-/* eslint-disable global-require */
 import React from 'react';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 import GettingStarted from '../assets/tutorialsSVG/gettingStarted.svg';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 module.exports.images = {
   logo: require('../assets/logo.png'),

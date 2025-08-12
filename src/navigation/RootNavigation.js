@@ -12,9 +12,7 @@ const screenOptions = {
 export default function RootNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={screenOptions}
-        initialRouteName="SplashScreen">
+      <Stack.Navigator screenOptions={screenOptions}>
         <Stack.Screen
           name="CompleteProfile"
           component={CompleteProfileWrapper}
