@@ -227,8 +227,8 @@ ExportToCSVPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
-  journalEntriesList: state.journalReducer.allJournalEntriesList,
+  user: state.auth?.user,
+  journalEntriesList: state.journal?.allJournalEntriesList,
 });
 
 const mapDispatchToProps = dispatch => ({

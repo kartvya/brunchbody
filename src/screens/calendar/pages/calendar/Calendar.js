@@ -893,13 +893,13 @@ CalendarPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
-  todo: state.todoReducer.todoTasks,
-  myThemes: state.calendarReducer.themes,
-  currentTheme: state.calendarReducer.currentTheme,
-  repeatedTheme: state.calendarReducer.repeatedTheme,
-  themesWithFrequency: state.calendarReducer.themesWithFrequency,
-  clearedThemeDays: state.calendarReducer.clearedThemeDays,
+  user: state.auth?.user,
+  todo: state.todo?.todoTasks,
+  myThemes: state.calendar?.themes,
+  currentTheme: state.calendar?.currentTheme,
+  repeatedTheme: state.calendar?.repeatedTheme,
+  themesWithFrequency: state.calendar?.themesWithFrequency,
+  clearedThemeDays: state.calendar?.clearedThemeDays,
 });
 
 const mapDispatchToProps = dispatch => ({

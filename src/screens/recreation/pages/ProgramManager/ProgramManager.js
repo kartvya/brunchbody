@@ -1,10 +1,10 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ProgramManager} from '../../components';
-import {wheelPickerItems} from '../../../../resources';
+import { connect } from 'react-redux';
+import { ProgramManager } from '../../components';
+import { wheelPickerItems } from '../../../../resources';
 import {
   editWeekPlan,
   getBrunchBodyWeekPlan,
@@ -22,7 +22,7 @@ export default function ProgramManagerPage(props) {
     onEditWeekPlan,
     onGetBrunchBodyWeekPlan,
   } = props;
-  const {selectedItem, program} = route.params; // selectedItem is selected custom/brunch body program
+  const { selectedItem, program } = route.params; // selectedItem is selected custom/brunch body program
   // console.log('selectedItem: ', selectedItem);
   const [btnTitle, setBtnTitle] = useState('');
   const [heading, setHeading] = useState('');
@@ -65,7 +65,7 @@ export default function ProgramManagerPage(props) {
   const onNavigate = (screen, val) => {
     navigation.navigate(screen, {
       selectedProgram: val,
-      selectedDay: {...selectedDay, type: btnTitle, week: weekNumber},
+      selectedDay: { ...selectedDay, type: btnTitle, week: weekNumber },
     });
   };
 
@@ -203,7 +203,7 @@ ProgramManagerPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  myWeekPlan: state.recreationReducer.weekPlan,
+  myWeekPlan: state.recreation?.weekPlan,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -109,8 +109,8 @@ DashboardPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
-  currentTheme: state.calendarReducer.currentTheme,
+  user: state.auth?.user,
+  currentTheme: state.calendar?.currentTheme,
 });
 
 const mapDispatchToProps = dispatch => ({

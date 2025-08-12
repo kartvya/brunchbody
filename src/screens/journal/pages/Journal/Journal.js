@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {Journal} from '../../components';
+import { Journal } from '../../components';
 import {
   editJournalEntry,
   getJournalEntries,
@@ -60,7 +60,7 @@ const listData = [
 let yearsList = [];
 
 export default function JournalPage(props) {
-  const {navigation, getAllJournalEntries, onEditEntry, getAllTraits} = props;
+  const { navigation, getAllJournalEntries, onEditEntry, getAllTraits } = props;
   const [loader, setLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [pageDetail, setPageDetail] = useState({});
@@ -80,7 +80,7 @@ export default function JournalPage(props) {
     yearsList = [];
 
     for (let i = 0; i <= new Date().getFullYear() - 1900; i += 1) {
-      yearsList.push({id: i, value: `${1900 + i}`});
+      yearsList.push({ id: i, value: `${1900 + i}` });
     }
   }, []);
 
@@ -157,7 +157,7 @@ export default function JournalPage(props) {
     d.setHours(0, 0, 0, 0);
 
     const entry = pageDetail.title;
-    const {entryId} = pageDetail;
+    const { entryId } = pageDetail;
 
     delete pageDetail.heading;
     delete pageDetail.title;
@@ -218,8 +218,8 @@ JournalPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  journalEntries: state.journalReducer.allEntries,
-  entryId: state.journalReducer.allEntries?.id,
+  journalEntries: state.journal?.allEntries,
+  entryId: state.journal?.allEntries?.id,
 });
 
 const mapDispatchToProps = dispatch => ({

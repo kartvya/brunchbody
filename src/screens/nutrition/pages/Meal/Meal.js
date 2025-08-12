@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {Meal} from '../../components';
+import { Meal } from '../../components';
 import {
   addMealItems,
   deleteMealItem,
@@ -10,8 +10,8 @@ import {
 } from '../../../../redux/actions';
 
 const selectOptions = [
-  {id: 1, option: 'FROM DIRECTORY'},
-  {id: 2, option: 'CUSTOM ITEM'},
+  { id: 1, option: 'FROM DIRECTORY' },
+  { id: 2, option: 'CUSTOM ITEM' },
 ];
 
 const createItemFields = [
@@ -49,9 +49,14 @@ const createItemFields = [
 ];
 
 export default function MealPage(props) {
-  const {navigation, route, onAddMealItems, onDeleteMealItem, onEditMealItem} =
-    props;
-  const {meal} = route.params;
+  const {
+    navigation,
+    route,
+    onAddMealItems,
+    onDeleteMealItem,
+    onEditMealItem,
+  } = props;
+  const { meal } = route.params;
   const [loader, setLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -252,7 +257,7 @@ MealPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  myMealItems: state.nutritionReducer.mealItems,
+  myMealItems: state.nutrition?.mealItems,
 });
 
 const mapDispatchToProps = dispatch => ({

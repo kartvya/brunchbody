@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {MealsList} from '../../components';
+import { MealsList } from '../../components';
 
 export default function MealsListPage(props) {
-  const {mealCategories} = props;
+  const { mealCategories } = props;
   const [search, setSearch] = useState('');
 
   return (
@@ -22,7 +22,7 @@ MealsListPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  mealCategories: state.nutritionReducer.mealCategories,
+  mealCategories: state.nutrition?.mealCategories,
 });
 
 export const MealsListWrapper = connect(mapStateToProps, null)(MealsListPage);

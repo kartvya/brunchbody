@@ -4,12 +4,12 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-use-before-define */
-import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {Recreation} from '../../components';
-import {wheelPickerItems} from '../../../../resources';
+import { Recreation } from '../../components';
+import { wheelPickerItems } from '../../../../resources';
 import {
   addCompletedWorkout,
   addCustomPlan,
@@ -32,23 +32,23 @@ import {
 } from '../../../../redux/actions';
 
 const workoutOptionsData = [
-  {id: 1, name: 'BRUNCH BODY'},
-  {id: 2, name: 'CUSTOM PROGRAMS'},
+  { id: 1, name: 'BRUNCH BODY' },
+  { id: 2, name: 'CUSTOM PROGRAMS' },
 ];
 
 const deleteWorkoutOptions = [
-  {id: 1, option: "TODAY'S WORKOUT"},
-  {id: 2, option: 'ENTIRE PROGRAM FROM CALENDAR'},
+  { id: 1, option: "TODAY'S WORKOUT" },
+  { id: 2, option: 'ENTIRE PROGRAM FROM CALENDAR' },
 ];
 
 const sequenceOptions = [
-  {id: 1, option: 'SINGLE WORKOUT'},
-  {id: 2, option: 'FROM HERE FORWARD'},
+  { id: 1, option: 'SINGLE WORKOUT' },
+  { id: 2, option: 'FROM HERE FORWARD' },
 ];
 
 const programMenuOptions = [
-  {id: 1, option: 'MY EXERCISES'},
-  {id: 2, option: 'CREATE A PLAN'},
+  { id: 1, option: 'MY EXERCISES' },
+  { id: 2, option: 'CREATE A PLAN' },
 ];
 
 const createProgramFields = [
@@ -143,7 +143,7 @@ export default function RecreationPage(props) {
 
   const onNavigate = async () => {
     if (screen) {
-      navigation.navigate(screen, {selectedItem, program});
+      navigation.navigate(screen, { selectedItem, program });
     } else {
       setProgramPlanLoader(true);
       setIsProgramDetailModal(true);
@@ -165,10 +165,10 @@ export default function RecreationPage(props) {
         const temp = await res?.weekDays?.find(i => i.day == selectedItem.day);
         const newPlan = await getPlan(temp);
 
-        setSelectedItem({...selectedItem, plan: newPlan});
+        setSelectedItem({ ...selectedItem, plan: newPlan });
         setProgramPlanLoader(false);
       } else {
-        setSelectedItem({...selectedItem, plan: []});
+        setSelectedItem({ ...selectedItem, plan: [] });
         setProgramPlanLoader(false);
       }
     }
@@ -195,7 +195,7 @@ export default function RecreationPage(props) {
     yearsList = [];
 
     for (let i = 0; i <= new Date().getFullYear() - 1900; i += 1) {
-      yearsList.push({id: i, value: `${1900 + i}`});
+      yearsList.push({ id: i, value: `${1900 + i}` });
     }
   }, []);
 
@@ -235,7 +235,7 @@ export default function RecreationPage(props) {
     setYear(newDate.getFullYear());
     getDaysInMonth(newDate.getMonth() + 1);
 
-    const {completedWorkouts = {}, deletedWorkouts = {}} = user;
+    const { completedWorkouts = {}, deletedWorkouts = {} } = user;
     const d = moment(currentDate).format('YYYY-MM-DD');
 
     const temp = [...myWorkouts].filter(i => {
@@ -453,10 +453,10 @@ export default function RecreationPage(props) {
               unit: i.unit,
             });
 
-            superExe.push({...i, cal: calories});
+            superExe.push({ ...i, cal: calories });
           });
 
-          plan.push({...item, supersetOptions: superExe});
+          plan.push({ ...item, supersetOptions: superExe });
         } else {
           const exe = await allExercises.find(
             e => e.name.toLowerCase() === item.exercise.toLowerCase(),
@@ -467,7 +467,7 @@ export default function RecreationPage(props) {
             unit: item.unit,
           });
 
-          plan.push({...item, cal: calories});
+          plan.push({ ...item, cal: calories });
         }
       });
     }
@@ -877,13 +877,13 @@ RecreationPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
-  myWorkouts: state.recreationReducer.workouts,
-  myWeekPlan: state.recreationReducer.weekPlan,
-  myRoutines: state.recreationReducer.routines,
-  myCustomPlans: state.recreationReducer.customPlans,
-  brunchBodyPlans: state.recreationReducer.brunchBodyPlans,
-  allExercises: state.exerciseReducer.wholeExercises,
+  user: state.auth?.user,
+  myWorkouts: state.recreation?.workouts,
+  myWeekPlan: state.recreation?.weekPlan,
+  myRoutines: state.recreation?.routines,
+  myCustomPlans: state.recreation?.customPlans,
+  brunchBodyPlans: state.recreation?.brunchBodyPlans,
+  allExercises: state.exercise?.wholeExercises,
 });
 
 const mapDispatchToProps = dispatch => ({

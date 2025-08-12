@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {colors} from '../../../../resources';
-import {Nutrition} from '../../components';
+import { colors } from '../../../../resources';
+import { Nutrition } from '../../components';
 import {
   addMeal,
   addSupplement,
@@ -91,27 +91,27 @@ export default class NutritionPage extends Component {
   }
 
   getAllMeals = async () => {
-    const {getUserMeals, getUserSupplements} = this.props;
+    const { getUserMeals, getUserSupplements } = this.props;
 
     await getUserMeals();
     await getUserSupplements();
   };
 
   onNavigate = val => {
-    const {navigation} = this.props;
-    navigation.navigate('Supplement', {title: val});
+    const { navigation } = this.props;
+    navigation.navigate('Supplement', { title: val });
   };
 
   onChangeHandler = data => {
-    const {name, value} = data;
+    const { name, value } = data;
     this.setState({
       [name]: value,
     });
   };
 
   onChangeTitle = data => {
-    const {type} = this.state;
-    const {name, value} = data;
+    const { type } = this.state;
+    const { name, value } = data;
     this.setState({
       [name]: value,
     });
@@ -121,7 +121,7 @@ export default class NutritionPage extends Component {
   };
 
   toggleMealModal = async item => {
-    const {onGetMealItems, onSetMealItems, myMeals} = this.props;
+    const { onGetMealItems, onSetMealItems, myMeals } = this.props;
     AsyncStorage.setItem('meal_id', item.id);
 
     this.setState({
@@ -150,7 +150,7 @@ export default class NutritionPage extends Component {
   };
 
   openSupplementModal = async item => {
-    const {onGetSupplementItems, onSetSupplementItems, mySupplements} =
+    const { onGetSupplementItems, onSetSupplementItems, mySupplements } =
       this.props;
 
     this.setState({
@@ -181,7 +181,7 @@ export default class NutritionPage extends Component {
   };
 
   toggleCalModal = () => {
-    this.setState({type: ''});
+    this.setState({ type: '' });
     const {
       fat,
       protein,
@@ -239,12 +239,12 @@ export default class NutritionPage extends Component {
   };
 
   onCreateItem = async () => {
-    const {title, color, type} = this.state;
-    const {onAddMeal, onAddSupplement} = this.props;
+    const { title, color, type } = this.state;
+    const { onAddMeal, onAddSupplement } = this.props;
     let response = null;
 
     if (title.trim()) {
-      this.setState({loader: true});
+      this.setState({ loader: true });
 
       if (type === 'meal') {
         response = await onAddMeal({
@@ -267,19 +267,19 @@ export default class NutritionPage extends Component {
         });
         this.showMessage('Success!', `Item added successfully.`);
       } else {
-        this.setState({loader: false, type: ''});
+        this.setState({ loader: false, type: '' });
         this.showMessage('Error!', response);
       }
     } else {
-      this.setState({type: ''});
+      this.setState({ type: '' });
       this.showMessage('Error!', `All fields are required.`);
     }
   };
 
   onCreateTargetCalories = async () => {
-    this.setState({loader: true});
-    const {updateUserProfile} = this.props;
-    const {fat, protein, carbohydrates, targetCalories} = this.state;
+    this.setState({ loader: true });
+    const { updateUserProfile } = this.props;
+    const { fat, protein, carbohydrates, targetCalories } = this.state;
 
     const response = await updateUserProfile({
       targetCalories: [
@@ -298,7 +298,7 @@ export default class NutritionPage extends Component {
           name: 'cho',
           value: `${Math.floor((targetCalories * (carbohydrates / 100)) / 4)}`,
         },
-        {id: 4, name: 'cal', value: targetCalories},
+        { id: 4, name: 'cal', value: targetCalories },
       ],
     });
 
@@ -322,11 +322,11 @@ export default class NutritionPage extends Component {
   };
 
   onDonePermissionModal = async () => {
-    const {type, meal, supplement} = this.state;
-    const {onDeleteMeal, onDeleteSupplement} = this.props;
+    const { type, meal, supplement } = this.state;
+    const { onDeleteMeal, onDeleteSupplement } = this.props;
 
     if (type === 'meal') {
-      this.setState({deleteLoader: true});
+      this.setState({ deleteLoader: true });
 
       const response = await onDeleteMeal(meal.id);
 
@@ -338,11 +338,11 @@ export default class NutritionPage extends Component {
           permissionModal: false,
         });
       } else {
-        this.setState({deleteLoader: false, type: ''});
+        this.setState({ deleteLoader: false, type: '' });
         this.showMessage('Error!', response);
       }
     } else if (type === 'supplement') {
-      this.setState({deleteLoader: true});
+      this.setState({ deleteLoader: true });
 
       const response = await onDeleteSupplement(supplement.id);
 
@@ -354,7 +354,7 @@ export default class NutritionPage extends Component {
           permissionModal: false,
         });
       } else {
-        this.setState({deleteLoader: false, type: ''});
+        this.setState({ deleteLoader: false, type: '' });
         this.showMessage('Error!', response);
       }
     } else {
@@ -372,7 +372,7 @@ export default class NutritionPage extends Component {
   };
 
   render() {
-    const {myMeals, mySupplements} = this.props;
+    const { myMeals, mySupplements } = this.props;
 
     return (
       <Nutrition
@@ -416,8 +416,8 @@ NutritionPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  myMeals: state.nutritionReducer.meals,
-  mySupplements: state.nutritionReducer.supplements,
+  myMeals: state.nutrition?.meals,
+  mySupplements: state.nutrition?.supplements,
 });
 
 const mapDispatchToProps = dispatch => ({

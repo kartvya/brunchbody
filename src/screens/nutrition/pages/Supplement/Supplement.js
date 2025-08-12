@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Supplement} from '../../components';
-import {wheelPickerItems} from '../../../../resources';
+import { connect } from 'react-redux';
+import { Supplement } from '../../components';
+import { wheelPickerItems } from '../../../../resources';
 import {
   addSupplementItems,
   deleteSupplementItem,
@@ -43,7 +43,7 @@ export default function SupplementPage(props) {
     onDeleteSupplementItem,
     onEditSupplementItem,
   } = props;
-  const {supplement} = route.params;
+  const { supplement } = route.params;
   const [loader, setLoader] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState(false);
   const [createItemModal, setCreateItemModal] = useState(false);
@@ -216,7 +216,7 @@ SupplementPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  mySupplementItems: state.nutritionReducer.supplementItems,
+  mySupplementItems: state.nutrition?.supplementItems,
 });
 
 const mapDispatchToProps = dispatch => ({

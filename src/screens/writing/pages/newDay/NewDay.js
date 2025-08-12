@@ -1,16 +1,16 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {strings, timeBlock} from '../../../../resources';
-import {NewDay} from '../../components';
-import {editTheme} from '../../../../redux/actions';
+import { connect } from 'react-redux';
+import { strings, timeBlock } from '../../../../resources';
+import { NewDay } from '../../components';
+import { editTheme } from '../../../../redux/actions';
 
 export default function NewDayPage(props) {
-  const {theme, onUpdateTheme} = props;
+  const { theme, onUpdateTheme } = props;
   const [timeData, setTimeData] = useState([]);
   const [visibilityEditEvent, setvisibilityEditEvent] = useState(false);
   const [visibleColorPicker, setvisibleColorPicker] = useState(false);
@@ -429,7 +429,7 @@ NewDayPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  theme: state.calendarReducer.theme,
+  theme: state.calendar?.theme,
 });
 
 const mapDispatchToProps = dispatch => ({

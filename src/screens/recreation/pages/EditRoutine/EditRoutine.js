@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {EditRoutine} from '../../components';
+import { connect } from 'react-redux';
+import { EditRoutine } from '../../components';
 import {
   addRoutineTask,
   deleteRoutineTask,
@@ -19,9 +19,9 @@ const createTaskFields = [
 ];
 
 export default function EditRoutinePage(props) {
-  const {route, onAddRoutineTask, onDeleteRoutineTask, onEditRoutineTask} =
+  const { route, onAddRoutineTask, onDeleteRoutineTask, onEditRoutineTask } =
     props;
-  const {selectedItem} = route.params; // selectedItem = selectedRoutine
+  const { selectedItem } = route.params; // selectedItem = selectedRoutine
   const [loader, setLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [createItemModal, setCreateItemModal] = useState(false);
@@ -168,7 +168,7 @@ EditRoutinePage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  myRoutineTasks: state.recreationReducer.routineTasks,
+  myRoutineTasks: state.recreation?.routineTasks,
 });
 
 const mapDispatchToProps = dispatch => ({

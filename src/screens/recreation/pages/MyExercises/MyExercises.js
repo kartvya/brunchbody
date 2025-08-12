@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {wheelPickerItems} from '../../../../resources';
-import {MyExercises} from '../../components';
+import { connect } from 'react-redux';
+import { wheelPickerItems } from '../../../../resources';
+import { MyExercises } from '../../components';
 import {
   addExercise,
   deleteExercise,
@@ -26,9 +26,9 @@ const createExerciseFields = [
 ];
 
 const exerciseTypeOptions = [
-  {id: 1, option: 'EXERCISE'},
-  {id: 2, option: 'CARDIO'},
-  {id: 3, option: 'SPORT'},
+  { id: 1, option: 'EXERCISE' },
+  { id: 2, option: 'CARDIO' },
+  { id: 3, option: 'SPORT' },
 ];
 
 export default function MyExercisesPage(props) {
@@ -198,8 +198,8 @@ MyExercisesPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userExercises: state.exerciseReducer.exercises,
-  allExercises: state.exerciseReducer.allExercises,
+  userExercises: state.exercise?.exercises,
+  allExercises: state.exercise?.allExercises,
 });
 
 const mapDispatchToProps = dispatch => ({

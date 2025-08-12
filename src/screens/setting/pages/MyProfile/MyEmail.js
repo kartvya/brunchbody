@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {MyEmail} from '../../components';
-import {changeEmail} from '../../../../redux/actions';
+import { MyEmail } from '../../components';
+import { changeEmail } from '../../../../redux/actions';
 
 export default function MyEmailPage(props) {
-  const {navigation, changeUserEmail} = props;
+  const { navigation, changeUserEmail } = props;
   const [loader, setLoader] = useState(false);
   const [email, setEmail] = useState('');
   const [confirmEmail, setConfirmEmail] = useState('');
@@ -72,7 +72,7 @@ MyEmailPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
+  user: state.auth?.user,
 });
 
 const mapDispatchToProps = dispatch => ({

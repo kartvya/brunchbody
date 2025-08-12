@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {TraitDirectory} from '../../components';
+import { TraitDirectory } from '../../components';
 
 export default function TraitDirectoryPage(props) {
-  const {traits} = props;
+  const { traits } = props;
   const [search, setSearch] = useState('');
 
   return (
@@ -21,7 +21,7 @@ TraitDirectoryPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  traits: state.journalReducer.allTraits,
+  traits: state.journal?.allTraits,
 });
 
 export const TraitDirectoryWrapper = connect(

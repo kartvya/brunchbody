@@ -1,16 +1,16 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
-import {ScrollView, SafeAreaView} from 'react-native';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { ScrollView, SafeAreaView } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import EditWriting from '../../components/EditWriting';
 import EditEvent from '../../components/EditEvent';
-import {strings, timeBlock, wheelPickerItems} from '../../../../resources';
+import { strings, timeBlock, wheelPickerItems } from '../../../../resources';
 import Picker from '../../../calendar/components/ColorPicker';
-import {editTheme} from '../../../../redux/actions';
+import { editTheme } from '../../../../redux/actions';
 import styles from '../../components/style';
 import {
   CustomModal,
@@ -19,7 +19,7 @@ import {
 } from '../../../../components';
 
 export default function EditWritingPage(props) {
-  const {currentTheme, onUpdateTheme} = props;
+  const { currentTheme, onUpdateTheme } = props;
   const [timeData, setTimeData] = useState([]);
   const [visibilityEditEvent, setvisibilityEditEvent] = useState(false);
   const [visibleColorPicker, setvisibleColorPicker] = useState(false);
@@ -500,7 +500,7 @@ EditWritingPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentTheme: state.calendarReducer.currentTheme,
+  currentTheme: state.calendar?.currentTheme,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -2,19 +2,19 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable eqeqeq */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {EditProgram} from '../../components';
-import {wheelPickerItems} from '../../../../resources';
-import {addWeekPlan, editWeekPlan} from '../../../../redux/actions';
+import { connect } from 'react-redux';
+import { EditProgram } from '../../components';
+import { wheelPickerItems } from '../../../../resources';
+import { addWeekPlan, editWeekPlan } from '../../../../redux/actions';
 
 const addExerciseOptions = [
-  {id: 1, option: 'SINGLE EXERCISE'},
-  {id: 2, option: 'SUPERSET'},
-  {id: 3, option: 'CARDIO'},
-  {id: 4, option: 'SPORT'},
-  {id: 5, option: 'NOTE'},
+  { id: 1, option: 'SINGLE EXERCISE' },
+  { id: 2, option: 'SUPERSET' },
+  { id: 3, option: 'CARDIO' },
+  { id: 4, option: 'SPORT' },
+  { id: 5, option: 'NOTE' },
 ];
 
 const addNoteFields = [
@@ -29,9 +29,9 @@ const addNoteFields = [
 ];
 
 export default function EditProgramPage(props) {
-  const {route, onAddWeekPlan, onEditWeekPlan, myWeekPlan, user} = props;
+  const { route, onAddWeekPlan, onEditWeekPlan, myWeekPlan, user } = props;
   // console.log('myWeekPlan: ', myWeekPlan);
-  const {selectedProgram, selectedDay} = route.params;
+  const { selectedProgram, selectedDay } = route.params;
   const [btnTitle, setBtnTitle] = useState('');
   const [heading, setHeading] = useState('');
   const [pickerItems, setPickerItems] = useState(wheelPickerItems.weeks);
@@ -211,7 +211,7 @@ export default function EditProgramPage(props) {
     if (supersetOptions.length >= 0) {
       supersetOptions[index].amount = text;
     } else {
-      supersetOptions.push({amount: text});
+      supersetOptions.push({ amount: text });
     }
   };
 
@@ -661,9 +661,9 @@ EditProgramPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
-  myWeekPlan: state.recreationReducer.weekPlan,
-  myExercises: state.exerciseReducer.allExercises,
+  user: state.auth?.user,
+  myWeekPlan: state.recreation?.weekPlan,
+  myExercises: state.exercise?.allExercises,
 });
 
 const mapDispatchToProps = dispatch => ({

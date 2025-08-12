@@ -19,6 +19,7 @@ export default function BottomTabNavigation() {
     <Tab.Navigator
       lazy={false}
       initialRouteName="Calendar"
+      screenOptions={{ headerShown: false }}
       tabBarOptions={{
         activeTintColor: colors.icon,
         style: {

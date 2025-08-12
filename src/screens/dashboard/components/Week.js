@@ -1,19 +1,20 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {connect} from 'react-redux';
+import { ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Details from './Details';
 import CarouselCards from './Carousel';
 import style from './style';
 
 function Week(props) {
-  const {weightData, outlookData, calDiffData} = props;
+  const { weightData, outlookData, calDiffData } = props;
 
   return (
     <ScrollView
       contentContainerStyle={style.scrollView}
-      showsVerticalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}
+    >
       <CarouselCards
         {...props}
         weightData={[...weightData].reverse()}
@@ -33,9 +34,9 @@ Week.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  weightData: state.journalReducer.weeklyWeightList,
-  outlookData: state.journalReducer.weeklyOutlookList,
-  calDiffData: state.journalReducer.weeklyCaloriesDiffList,
+  weightData: state.journal?.weeklyWeightList,
+  outlookData: state.journal?.weeklyOutlookList,
+  calDiffData: state.journal?.weeklyCaloriesDiffList,
 });
 
 export default connect(mapStateToProps)(Week);

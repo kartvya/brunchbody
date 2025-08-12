@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import {colors, wheelPickerItems} from '../../../../resources';
-import {SupplementLog} from '../../components';
+import { colors, wheelPickerItems } from '../../../../resources';
+import { SupplementLog } from '../../components';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -13,8 +13,8 @@ import {
 } from '../../../../redux/actions';
 
 const selectOptions = [
-  {id: 1, option: 'FROM STACKS'},
-  {id: 2, option: 'SINGLE ITEM'},
+  { id: 1, option: 'FROM STACKS' },
+  { id: 2, option: 'SINGLE ITEM' },
 ];
 
 const createItemFields = [
@@ -54,7 +54,7 @@ export default function SupplementLogPage(props) {
     onGetSupplementItems,
     onEditEntry,
   } = props;
-  const {entryData, entryId} = route.params;
+  const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [btnLoader, setBtnLoader] = useState(false);
   const [modalLoader, setModalLoader] = useState(false);
@@ -135,7 +135,7 @@ export default function SupplementLogPage(props) {
 
       if (response.length > 0) {
         response.map(i =>
-          totalItems.push({...i, stackId: selectedSupplement.id}),
+          totalItems.push({ ...i, stackId: selectedSupplement.id }),
         );
         selectedSupplements.push(selectedSupplement);
       } else {
@@ -327,8 +327,8 @@ SupplementLogPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  mySupplements: state.nutritionReducer.supplements,
-  mySupplementItems: state.nutritionReducer.supplementItems,
+  mySupplements: state.nutrition?.supplements,
+  mySupplementItems: state.nutrition?.supplementItems,
 });
 
 const mapDispatchToProps = dispatch => ({

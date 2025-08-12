@@ -1,15 +1,15 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import {Writing} from '../../components';
-import {timeBlock} from '../../../../resources';
+import { Writing } from '../../components';
+import { timeBlock } from '../../../../resources';
 
 export default function WritingPage(props) {
-  const {currentTheme} = props;
+  const { currentTheme } = props;
   const [timeData, setTimeData] = useState([]);
   const [isItineraryDetailModal, setIsItineraryDetailModal] = useState(false);
   const [modalHeading, setModalHeading] = useState('');
@@ -107,7 +107,7 @@ WritingPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  currentTheme: state.calendarReducer.currentTheme,
+  currentTheme: state.calendar?.currentTheme,
 });
 
 export const WritingWrapper = connect(mapStateToProps, null)(WritingPage);

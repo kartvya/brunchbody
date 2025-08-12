@@ -5,13 +5,16 @@ import RootNavigation from '../navigation/RootNavigation';
 import { persistor, store } from '../redux';
 import { PaperProvider } from 'react-native-paper';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { colors } from '../resources';
 
 export class RootContainer extends Component {
   render() {
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <GestureHandlerRootView style={{ flex: 1 }}>
+          <GestureHandlerRootView
+            style={{ flex: 1, backgroundColor: colors.background }}
+          >
             <PaperProvider>
               <RootNavigation />
             </PaperProvider>

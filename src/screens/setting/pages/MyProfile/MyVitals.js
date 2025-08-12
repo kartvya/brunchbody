@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {MyVitals} from '../../components';
-import {loggedIn, profile} from '../../../../redux/actions';
+import { MyVitals } from '../../components';
+import { loggedIn, profile } from '../../../../redux/actions';
 
 let yearsList = [];
 
 export default function MyVitalsPage(props) {
-  const {navigation, user, updateUserProfile, getUserData} = props;
+  const { navigation, user, updateUserProfile, getUserData } = props;
   const [loader, setLoader] = useState(false);
   const [isEnabled, setIsEnabled] = useState(user.gender !== 'male');
   const [datePickerModal, setDatePickerModal] = useState(false);
@@ -30,7 +30,7 @@ export default function MyVitalsPage(props) {
     yearsList = [];
 
     for (let i = 0; i <= new Date().getFullYear() - 1900; i += 1) {
-      yearsList.push({id: i, value: `${1900 + i}`});
+      yearsList.push({ id: i, value: `${1900 + i}` });
     }
   }, []);
 
@@ -117,7 +117,7 @@ MyVitalsPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
+  user: state.auth?.user,
 });
 
 const mapDispatchToProps = dispatch => ({

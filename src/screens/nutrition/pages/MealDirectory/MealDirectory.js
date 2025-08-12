@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {MealDirectory} from '../../components';
+import { MealDirectory } from '../../components';
 
 export default function MealDirectoryPage(props) {
-  const {mealsDirectory} = props;
+  const { mealsDirectory } = props;
   const [search, setSearch] = useState('');
 
   return (
@@ -23,7 +23,7 @@ MealDirectoryPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  mealsDirectory: state.nutritionReducer.mealsDirectory,
+  mealsDirectory: state.nutrition?.mealsDirectory,
 });
 
 export const MealDirectoryWrapper = connect(

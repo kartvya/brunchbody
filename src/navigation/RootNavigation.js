@@ -77,7 +77,7 @@ export default function RootNavigation() {
   // );
 
   // Get user from Redux
-  const user = useSelector(state => state.auth?.user);
+  const user = useSelector(state => state?.auth?.user);
   const initialRoute = user && Object.keys(user).length > 0 ? 'Home' : 'SignIn';
 
   return (

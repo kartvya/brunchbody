@@ -3,12 +3,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import {colors} from '../../../../resources';
-import {Calories} from '../../components';
+import { colors } from '../../../../resources';
+import { Calories } from '../../components';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -18,8 +18,8 @@ import {
 } from '../../../../redux/actions';
 
 const selectOptions = [
-  {id: 1, option: 'FROM MEALS'},
-  {id: 2, option: 'SINGLE ITEM'},
+  { id: 1, option: 'FROM MEALS' },
+  { id: 2, option: 'SINGLE ITEM' },
 ];
 
 const createItems = [
@@ -81,7 +81,7 @@ export default function CaloriesPage(props) {
     myCompletedWorkouts,
     user,
   } = props;
-  const {entryData, entryId} = route.params;
+  const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [modalLoader, setModalLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -586,10 +586,10 @@ CaloriesPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
-  myMeals: state.nutritionReducer.meals,
-  myMealItems: state.nutritionReducer.mealItems,
-  myCompletedWorkouts: state.recreationReducer.completedWorkouts,
+  user: state.auth?.user,
+  myMeals: state.nutrition?.meals,
+  myMealItems: state.nutrition?.mealItems,
+  myCompletedWorkouts: state.recreation?.completedWorkouts,
 });
 
 const mapDispatchToProps = dispatch => ({

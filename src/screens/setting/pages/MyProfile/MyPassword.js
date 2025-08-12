@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {MyPassword} from '../../components';
-import {changePassword, resetPassword} from '../../../../redux/actions';
+import { MyPassword } from '../../components';
+import { changePassword, resetPassword } from '../../../../redux/actions';
 
 export default function MyPasswordPage(props) {
-  const {navigation, user, changeUserPassword, onResetPassword} = props;
+  const { navigation, user, changeUserPassword, onResetPassword } = props;
   const [forgotPassModal, setForgotPassModal] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -114,7 +114,7 @@ MyPasswordPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  user: state.authReducer.user,
+  user: state.auth?.user,
 });
 
 const mapDispatchToProps = dispatch => ({
