@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-properties */
-import {SET_USER} from '../constants';
+import { SET_USER } from '../constants';
 
 const initialState = {
   user: {},
@@ -8,13 +8,16 @@ const initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER: {
-      const userData = {...action.payload};
+      const userData = { ...action.payload };
       const userHeight =
         parseInt(
           userData?.height?.slice(0, userData?.height?.search('\\.')) * 12,
           10,
         ) +
-        parseInt(userData?.height?.slice(userData?.height?.search('\\.') + 1), 10);
+        parseInt(
+          userData?.height?.slice(userData?.height?.search('\\.') + 1),
+          10,
+        );
       const date = new Date();
       const currentDateArr = [
         `${date.getDate()}`.slice(-2),
@@ -65,7 +68,7 @@ const authReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        user: {...userData, bmi, bmr},
+        user: { ...userData, bmi, bmr },
       };
     }
     default:

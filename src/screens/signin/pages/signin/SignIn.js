@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {BackHandler} from 'react-native';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { BackHandler } from 'react-native';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useFocusEffect} from '@react-navigation/native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useFocusEffect } from '@react-navigation/native';
 import SignIn from '../../components';
-import {login, resetPassword, socialLogin} from '../../../../redux/actions';
+import { login, resetPassword, socialLogin } from '../../../../redux/actions';
 
 GoogleSignin.configure({
   webClientId:
@@ -13,11 +13,11 @@ GoogleSignin.configure({
 });
 
 export default function SignInPage(props) {
-  const {navigation, loginUser, socialLoginUser, onResetPassword} = props;
+  const { navigation, loginUser, socialLoginUser, onResetPassword } = props;
   const [loader, setLoader] = useState(false);
   const [resetLoader, setResetLoader] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test2@gmail.com');
+  const [password, setPassword] = useState('test@123');
   const [forgotModalEmail, setForgotModalEmail] = useState('');
   const [forgotPassModal, setForgotPassModal] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
@@ -51,7 +51,10 @@ export default function SignInPage(props) {
     const google = await GoogleSignin.signIn();
 
     // Create a Google credential with the token
-    const googleCredential = {token: google.idToken, providerId: 'google.com'};
+    const googleCredential = {
+      token: google.idToken,
+      providerId: 'google.com',
+    };
 
     setSocialLoader(true);
     const response = await socialLoginUser({
@@ -83,6 +86,7 @@ export default function SignInPage(props) {
     const regx = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (email.trim() && password.trim()) {
+      console.log(!regx.test(email), 'emaiemaill');
       if (!regx.test(email)) {
         showMessage('Error!', 'Email address is badly formatted.');
       } else {

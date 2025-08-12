@@ -2,12 +2,12 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView, ScrollView} from 'react-native';
-import {connect, useDispatch} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { View, Text, SafeAreaView, ScrollView } from 'react-native';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {colors, strings, wheelPickerItems} from '../../../../resources';
+import { colors, strings, wheelPickerItems } from '../../../../resources';
 import CalendarUI from '../../components';
 import Todo from '../../components/Todo';
 import Writing from '../../components/Writing';
@@ -76,6 +76,8 @@ export default function CalendarPage(props) {
     onRemoveThemeDays,
     clearedThemeDays,
   } = props;
+
+  console.log(user, 'useuseruseruserr');
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [visibleEdit, setvisibleEdit] = useState(false);
@@ -240,7 +242,7 @@ export default function CalendarPage(props) {
     yearsList = [];
 
     for (let i = 0; i <= year - 1900; i += 1) {
-      yearsList.push({id: i, value: `${1900 + i}`});
+      yearsList.push({ id: i, value: `${1900 + i}` });
     }
   }, []);
 
@@ -446,7 +448,7 @@ export default function CalendarPage(props) {
           ? parseInt(daysToFollow, 10) * 30 - 1
           : 1;
 
-      const themeData = {...selectedTheme};
+      const themeData = { ...selectedTheme };
       // delete selectedTheme.id;
 
       const response = await onAddRepeatedTheme({
@@ -633,7 +635,7 @@ export default function CalendarPage(props) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.background}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
       <ScrollView>
         <View style={styles.headingView}>
           <Text style={styles.headingText}>Calendar</Text>

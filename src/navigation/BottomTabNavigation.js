@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {DashboardWrapper} from '../screens/dashboard';
-import {JournalWrapper} from '../screens/journal';
-import {SettingWrapper} from '../screens/setting';
-import {NutritionWrapper} from '../screens/nutrition';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { DashboardWrapper } from '../screens/dashboard';
+import { JournalWrapper } from '../screens/journal';
+import { SettingWrapper } from '../screens/setting';
+import { NutritionWrapper } from '../screens/nutrition';
 import CalendarNavigation from './CalendarNavigation';
-import {RecreationWrapper} from '../screens/recreation';
-import {colors} from '../resources';
+import { RecreationWrapper } from '../screens/recreation';
+import { colors } from '../resources';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,13 +31,14 @@ export default function BottomTabNavigation() {
         labelStyle: {
           fontSize: RFValue(8),
         },
-      }}>
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={DashboardWrapper}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="home"
               color={color}
@@ -51,7 +52,7 @@ export default function BottomTabNavigation() {
         component={JournalWrapper}
         options={{
           tabBarLabel: 'Journal',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="notebook"
               color={color}
@@ -61,11 +62,11 @@ export default function BottomTabNavigation() {
         }}
       />
       <Tab.Screen
-        name="CalendarScreen"
+        name="Calendar"
         component={CalendarNavigation}
         options={{
           tabBarLabel: 'Calendar',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="calendar"
               color={color}
@@ -79,7 +80,7 @@ export default function BottomTabNavigation() {
         component={NutritionWrapper}
         options={{
           tabBarLabel: 'Nutrition',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Icon name="restaurant" color={color} size={RFValue(25)} />
           ),
         }}
@@ -89,7 +90,7 @@ export default function BottomTabNavigation() {
         component={RecreationWrapper}
         options={{
           tabBarLabel: 'Recreation',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
               name="human-handsup"
               color={color}
@@ -103,7 +104,7 @@ export default function BottomTabNavigation() {
         component={SettingWrapper}
         options={{
           tabBarLabel: 'Settings',
-          tabBarIcon: ({color}) => (
+          tabBarIcon: ({ color }) => (
             <Icon name="settings" color={color} size={RFValue(25)} />
           ),
         }}

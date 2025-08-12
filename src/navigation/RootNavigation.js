@@ -4,7 +4,7 @@ import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
-import BottomTabNavigation from './BottomTabNavigation';
+
 import { WelcomeWrapper } from '../screens/welcome';
 import { SignUpWrapper } from '../screens/signup';
 import { SignInWrapper } from '../screens/signin';
@@ -48,6 +48,7 @@ import {
   DeleteAccountWrapper,
 } from '../screens/setting';
 import { DateProvider } from '../context/DateProvider';
+import BottomTabNavigation from './BottomTabNavigation';
 
 const Stack = createStackNavigator();
 

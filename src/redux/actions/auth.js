@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {serverUrl} from '../../config';
-import {SET_USER} from '../constants';
+import { serverUrl } from '../../config';
+import { SET_USER } from '../constants';
 
 export const loggedIn = () => async dispatch => {
   console.log('Inside loggedIn');
@@ -35,7 +35,7 @@ export const loggedIn = () => async dispatch => {
       console.log('Inside loggedIn', value);
     });
 
-    const {user} = request.result;
+    const { user } = request.result;
 
     if (user.weight && user.height) {
       dispatch({
@@ -56,13 +56,13 @@ export const login = data => async dispatch => {
     method: 'POST',
     baseURL: serverUrl,
     url: 'auth/user/login',
-    data: {userData: data},
+    data: { userData: data },
   })
     .then(res => res.data)
     .catch(err => console.log(err));
 
   if (request) {
-    const {user} = request.result;
+    const { user } = request.result;
     AsyncStorage.setItem('uid', request.result.uid);
     AsyncStorage.setItem('auth_token', request.result.authToken);
     AsyncStorage.setItem('refresh_token', request.result.refreshToken);
@@ -86,13 +86,13 @@ export const socialLogin = data => async dispatch => {
     method: 'POST',
     baseURL: serverUrl,
     url: 'auth/user/social/login',
-    data: {...data},
+    data: { ...data },
   })
     .then(res => res.data)
     .catch(() => false);
 
   if (request) {
-    const {user} = request.result;
+    const { user } = request.result;
     AsyncStorage.setItem('uid', request.result.uid);
     AsyncStorage.setItem('auth_token', request.result.authToken);
     AsyncStorage.setItem('refresh_token', request.result.refreshToken);
@@ -116,7 +116,7 @@ export const createAccount = data => async () => {
     method: 'POST',
     baseURL: serverUrl,
     url: 'auth/user/signup',
-    data: {userData: data},
+    data: { userData: data },
   })
     .then(res => res.data)
     .catch(err => err.response.data);
@@ -254,7 +254,7 @@ export const logout = () => async () => {
     method: 'POST',
     baseURL: serverUrl,
     url: 'auth/user/logout',
-    data: {uid},
+    data: { uid },
   })
     .then(res => res.data)
     .catch(err => err.response.data);
