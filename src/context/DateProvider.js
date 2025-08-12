@@ -31,19 +31,21 @@ export const DateProvider = ({ children }) => {
   const [date, setDateState] = useState(() => now().date());
   const [month, setMonthState] = useState(() => now().month() + 1);
   const [year, setYearState] = useState(() => now().year());
-  const [todoListDate, setTodoListDate] = useState(() => now().format('YYYY-MM-DD'));
+  const [todoListDate, setTodoListDate] = useState(() =>
+    now().format('YYYY-MM-DD'),
+  );
 
-  const setDate = (d) => {
+  const setDate = d => {
     hasUserModified.current = true;
     setDateState(d);
   };
 
-  const setMonth = (m) => {
+  const setMonth = m => {
     hasUserModified.current = true;
     setMonthState(m);
   };
 
-  const setYear = (y) => {
+  const setYear = y => {
     hasUserModified.current = true;
     setYearState(y);
   };
@@ -67,13 +69,17 @@ export const DateProvider = ({ children }) => {
       setTodayKey(newKey);
 
       if (!hasUserModified.current) {
-        console.log('[DateProvider] Resetting to today (user has not modified)');
+        console.log(
+          '[DateProvider] Resetting to today (user has not modified)',
+        );
         setDateState(current.date());
         setMonthState(current.month() + 1);
         setYearState(current.year());
         setTodoListDate(newKey);
       } else {
-        console.log('[DateProvider] Skipping reset — user has manually modified date');
+        console.log(
+          '[DateProvider] Skipping reset — user has manually modified date',
+        );
       }
     }
   }, [today]);
@@ -81,7 +87,7 @@ export const DateProvider = ({ children }) => {
   useEffect(() => {
     updateIfNeeded();
 
-    const handleAppStateChange = (nextAppState) => {
+    const handleAppStateChange = nextAppState => {
       if (
         appState.current.match(/inactive|background/) &&
         nextAppState === 'active'
@@ -92,7 +98,10 @@ export const DateProvider = ({ children }) => {
       appState.current = nextAppState;
     };
 
-    const subscription = AppState.addEventListener('change', handleAppStateChange);
+    const subscription = AppState.addEventListener(
+      'change',
+      handleAppStateChange,
+    );
     return () => subscription.remove();
   }, [updateIfNeeded]);
 

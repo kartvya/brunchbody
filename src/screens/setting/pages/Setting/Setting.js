@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ReactNativeAN from 'react-native-alarm-notification';
-import {useFocusEffect} from '@react-navigation/core';
+// import ReactNativeAN from 'react-native-alarm-notification';
+import { useFocusEffect } from '@react-navigation/core';
 import moment from 'moment';
-import {Setting} from '../../components';
-import {logout} from '../../../../redux/actions';
+import { Setting } from '../../components';
+import { logout } from '../../../../redux/actions';
 
 const initialState = {
   clockToggle: true,
@@ -21,7 +21,7 @@ const listData = [
   {
     id: 1,
     title: 'My Profile',
-    options: [{id: 1, name: 'Manage Profile', type: '', screen: 'MyProfile'}],
+    options: [{ id: 1, name: 'Manage Profile', type: '', screen: 'MyProfile' }],
   },
   {
     id: 2,
@@ -104,7 +104,7 @@ const listData = [
     id: 6,
     title: 'About',
     options: [
-      {id: 1, name: 'Version', type: '', screen: ''},
+      { id: 1, name: 'Version', type: '', screen: '' },
       {
         id: 2,
         name: 'Terms of use',
@@ -117,9 +117,9 @@ const listData = [
         type: '',
         link: 'https://brunchbodyfit.com/privacy-policy/',
       },
-      {id: 4, name: 'Tutorial', type: '', screen: 'Tutorials'},
-      {id: 5, name: 'Abbrevations', type: '', screen: 'Abbrevations'},
-      {id: 6, name: 'Rate us', type: '', screen: ''},
+      { id: 4, name: 'Tutorial', type: '', screen: 'Tutorials' },
+      { id: 5, name: 'Abbrevations', type: '', screen: 'Abbrevations' },
+      { id: 6, name: 'Rate us', type: '', screen: '' },
       {
         id: 7,
         name: 'Contact Us',
@@ -132,7 +132,7 @@ const listData = [
   {
     id: 7,
     title: 'Logout',
-    options: [{id: 1, name: 'Logout', type: '', screen: ''}],
+    options: [{ id: 1, name: 'Logout', type: '', screen: '' }],
     screen: '',
   },
 ];
@@ -141,7 +141,7 @@ let currentHours = '';
 let currentMinutes = '';
 
 export default function SettingPage(props) {
-  const {navigation, logoutUser} = props;
+  const { navigation, logoutUser } = props;
   const [state, setState] = useState(initialState);
   const [hours, setHours] = useState(moment().format('h'));
   const [minutes, setMinutes] = useState(moment().format('m'));
@@ -162,7 +162,7 @@ export default function SettingPage(props) {
   );
 
   const onChangeHandler = data => {
-    const {name, value} = data;
+    const { name, value } = data;
     setState({
       ...state,
       [name]: value,
@@ -204,21 +204,6 @@ export default function SettingPage(props) {
     }
   };
 
-  const method = async (alarmNotifData, fireDate) => {
-    const alarms = await ReactNativeAN.getScheduledAlarms();
-
-    alarms.forEach(a => {
-      ReactNativeAN.deleteAlarm(a.id);
-      ReactNativeAN.deleteRepeatingAlarm(a.id);
-    });
-
-    // Schedule Future Alarm
-    await ReactNativeAN.scheduleAlarm({
-      ...alarmNotifData,
-      fire_date: fireDate,
-    });
-  };
-
   const onAddAlarmHandler = async () => {
     const currentDate = new Date();
     let hrs = hours;
@@ -234,31 +219,12 @@ export default function SettingPage(props) {
     currentDate.setMinutes(minutes);
     onSetListing(currentDate);
 
-    const fireDate = ReactNativeAN.parseDate(currentDate);
+    onChangeHandler({
+      name: 'isTimePickerModal',
+      value: false,
+    });
 
-    const alarmNotifData = {
-      vibrate: false,
-      loop_sound: true,
-      // has_button: true,
-      auto_cancel: true,
-      title: 'Alarm',
-      message: alarmHeading,
-      channel: 'my_channel_id',
-      small_icon: 'ic_launcher',
-      data: {foo: 'bar'},
-    };
-
-    await method(alarmNotifData, fireDate)
-      .then(() => {
-        onChangeHandler({
-          name: 'isTimePickerModal',
-          value: false,
-        });
-        showMessage('Success!', `Alarm added successfully.`);
-      })
-      .catch(() => {
-        showMessage('Error!', `You can’t add alarm for past time.`);
-      });
+    showMessage('Info', 'Alarm notifications are disabled in this build.');
   };
 
   return (

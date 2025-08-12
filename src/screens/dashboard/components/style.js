@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {RFPercentage, RFValue} from 'react-native-responsive-fontsize';
-import {colors} from '../../../resources';
+import { StyleSheet } from 'react-native';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { colors } from '../../../resources';
 
 export default StyleSheet.create({
   safeAreaView: {
@@ -154,10 +154,6 @@ export default StyleSheet.create({
     color: colors.white,
     fontSize: RFValue(18),
     fontWeight: 'bold',
-  },
-  bannerView: {
-    marginBottom: 15,
-    alignItems: 'center',
   },
   emptyDayView: {
     borderWidth: 2,

@@ -1,10 +1,9 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import { SafeAreaView, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import {BannerAd, BannerAdSize} from '@react-native-firebase/admob';
-import {CustomTopTabs} from '../../../components';
+import { CustomTopTabs } from '../../../components';
 import Day from './Day';
 import Week from './Week';
 import Month from './Month';
@@ -12,7 +11,7 @@ import Year from './Year';
 import style from './style';
 
 export default function Dashboard(props) {
-  const {tabs, selectedTab, adUnitId} = props;
+  const { tabs, selectedTab } = props;
 
   return (
     <SafeAreaView style={style.safeAreaView}>
@@ -33,16 +32,6 @@ export default function Dashboard(props) {
       ) : (
         <Year {...props} />
       )}
-
-      <View style={style.bannerView}>
-        <BannerAd
-          unitId={adUnitId}
-          size={BannerAdSize.BANNER}
-          requestOptions={{
-            requestNonPersonalizedAdsOnly: true,
-          }}
-        />
-      </View>
     </SafeAreaView>
   );
 }
@@ -50,5 +39,4 @@ export default function Dashboard(props) {
 Dashboard.propTypes = {
   selectedTab: PropTypes.number.isRequired,
   tabs: PropTypes.arrayOf(PropTypes.any).isRequired,
-  adUnitId: PropTypes.string.isRequired,
 };

@@ -1,18 +1,13 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-console */
-/* eslint-disable no-use-before-define */
-/* eslint-disable prefer-template */
-import React, {useState} from 'react';
-import {connect} from 'react-redux';
-import {PermissionsAndroid} from 'react-native';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { PermissionsAndroid } from 'react-native';
 import * as ScopedStorage from 'react-native-scoped-storage';
 import XLSX from 'xlsx';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import RNFS from 'react-native-fs';
-import {ExportToCSV} from '../../components';
-import {login} from '../../../../redux/actions';
+import { ExportToCSV } from '../../components';
+import { login } from '../../../../redux/actions';
 
 const listData = [
   {
@@ -66,7 +61,7 @@ const listData = [
 ];
 
 export default function ExportToCSVPage(props) {
-  const {navigation, journalEntriesList, loginUser, user} = props;
+  const { navigation, journalEntriesList, loginUser, user } = props;
   const [entryType, setEntryType] = useState('');
   const [entryData, setEntryData] = useState(null);
   const [alertHeading, setAlertHeading] = useState('');
@@ -112,7 +107,7 @@ export default function ExportToCSVPage(props) {
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(entryData);
     XLSX.utils.book_append_sheet(wb, ws, 'Users');
-    const wbout = XLSX.write(wb, {type: 'binary', bookType: 'xlsx'});
+    const wbout = XLSX.write(wb, { type: 'binary', bookType: 'xlsx' });
 
     const dir = await ScopedStorage.openDocumentTree(true);
     // console.log('dir: ', dir);

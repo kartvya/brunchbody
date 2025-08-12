@@ -1,14 +1,13 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useEffect, useState} from 'react';
-import {BackHandler, Platform} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {useFocusEffect} from '@react-navigation/native';
-import {TestIds} from '@react-native-firebase/admob';
+import React, { useEffect, useState } from 'react';
+import { BackHandler } from 'react-native';
+import { connect } from 'react-redux';
+import { getAllJournalEntries } from '../../../../redux/actions';
 import Dashboard from '../../components';
-import {getAllJournalEntries} from '../../../../redux/actions';
 
 const daysName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const monthsName = [
@@ -27,20 +26,14 @@ const monthsName = [
 ];
 
 const tabs = [
-  {id: 1, title: 'D'},
-  {id: 2, title: 'W'},
-  {id: 3, title: 'M'},
-  {id: 4, title: 'Y'},
+  { id: 1, title: 'D' },
+  { id: 2, title: 'W' },
+  { id: 3, title: 'M' },
+  { id: 4, title: 'Y' },
 ];
 
-const adUnitId = __DEV__
-  ? TestIds.BANNER
-  : Platform.OS === 'android'
-  ? 'ca-app-pub-5591469599584642/5723271832'
-  : 'ca-app-pub-5591469599584642/1451730233';
-
 export function DashboardPage(props) {
-  const {getAllUserEntries} = props;
+  const { getAllUserEntries } = props;
   const [loader, setLoader] = useState(true);
   const [days] = useState([]);
   const [months] = useState([]);
@@ -107,7 +100,6 @@ export function DashboardPage(props) {
       tabs={tabs}
       selectedTab={selectedTab}
       setSelectedTab={setSelectedTab}
-      adUnitId={adUnitId}
     />
   );
 }
