@@ -1,18 +1,16 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 import React from 'react';
-import {NativeEventEmitter, NativeModules} from 'react-native';
-import ReactNativeAN from 'react-native-alarm-notification';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
+// import ReactNativeAN from 'react-native-alarm-notification';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { useSelector } from 'react-redux';
 import BottomTabNavigation from './BottomTabNavigation';
-import {WelcomeWrapper} from '../screens/welcome';
-import {SplashScreenWrapper} from '../screens/splashScreen';
-import {SignUpWrapper} from '../screens/signup';
-import {SignInWrapper} from '../screens/signin';
-import {CompleteProfileWrapper} from '../screens/completeProfile/pages/completeProfile/CompleteProfile';
-import {MyAccountWrapper} from '../screens/setting/pages/MyProfile/MyAccount';
-import {DashboardWrapper} from '../screens/dashboard';
+import { WelcomeWrapper } from '../screens/welcome';
+import { SignUpWrapper } from '../screens/signup';
+import { SignInWrapper } from '../screens/signin';
+import { CompleteProfileWrapper } from '../screens/completeProfile/pages/completeProfile/CompleteProfile';
+import { MyAccountWrapper } from '../screens/setting/pages/MyProfile/MyAccount';
+import { DashboardWrapper } from '../screens/dashboard';
 import {
   CaloriesWrapper,
   DailyEntryWrapper,
@@ -49,6 +47,7 @@ import {
   MyPasswordWrapper,
   DeleteAccountWrapper,
 } from '../screens/setting';
+import { DateProvider } from '../context/DateProvider';
 
 const Stack = createStackNavigator();
 
@@ -57,32 +56,37 @@ const screenOptions = {
 };
 
 export default function RootNavigation() {
-  const {RNAlarmNotification} = NativeModules;
-  const RNAlarmEmitter = new NativeEventEmitter(RNAlarmNotification);
+  let dismissSubscription = null;
+  const { RNAlarmNotification } = NativeModules;
 
-  const dismissSubscription = RNAlarmEmitter.addListener(
-    'OnNotificationDismissed',
-    data => console.log(data),
-  );
+  if (Platform.OS === 'android' && RNAlarmNotification) {
+    const RNAlarmEmitter = new NativeEventEmitter(RNAlarmNotification);
+    dismissSubscription = RNAlarmEmitter.addListener(
+      'OnNotificationDismissed',
+      data => console.log(data),
+    );
+  }
 
-  const openedSubscription = RNAlarmEmitter.addListener(
-    'OnNotificationOpened',
-    data => {
-      console.log('notification data --> ', data);
-      ReactNativeAN.stopAlarmSound();
-    },
-  );
+  // const openedSubscription = RNAlarmEmitter.addListener(
+  //   'OnNotificationOpened',
+  //   data => {
+  //     console.log('notification data --> ', data);
+  //     ReactNativeAN.stopAlarmSound();
+  //   },
+  // );
+
+  // Get user from Redux
+  const user = useSelector(state => state.auth?.user);
+  const initialRoute = user && Object.keys(user).length > 0 ? 'Home' : 'SignIn';
 
   return (
+    <DateProvider>
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={screenOptions}
-        initialRouteName="SplashScreen">
+      <Stack.Navigator screenOptions={screenOptions} initialRouteName={initialRoute}>
         <Stack.Screen
           name="CompleteProfile"
           component={CompleteProfileWrapper}
         />
-        <Stack.Screen name="SplashScreen" component={SplashScreenWrapper} />
         <Stack.Screen name="SignUp" component={SignUpWrapper} />
         <Stack.Screen name="SignIn" component={SignInWrapper} />
         <Stack.Screen name="Welcome" component={WelcomeWrapper} />
@@ -119,5 +123,6 @@ export default function RootNavigation() {
         <Stack.Screen name="MyExercises" component={MyExercisesWrapper} />
       </Stack.Navigator>
     </NavigationContainer>
+    </DateProvider>
   );
 }
