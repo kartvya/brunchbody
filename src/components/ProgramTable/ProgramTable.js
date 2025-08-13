@@ -1,28 +1,26 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable eqeqeq */
-/* eslint-disable no-shadow */
-import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { colors } from '../../resources';
 import Dashed from '../Dashed';
-import {colors} from '../../resources';
 import styles from './style';
 
 export default function ProgramTable(props) {
-  const {data, isModal, onEditExercise, note} = props;
+  const { data, isModal, onEditExercise, note } = props;
   let calCost = 0;
 
   return (
     <View>
       <View style={styles.totalItemsView}>
-        <Text style={[styles.tableHeadingStyle, {width: '40%'}]}>Exercise</Text>
-        <Text style={[styles.tableHeadingStyle, {textAlign: 'center'}]}>
+        <Text style={[styles.tableHeadingStyle, { width: '40%' }]}>
+          Exercise
+        </Text>
+        <Text style={[styles.tableHeadingStyle, { textAlign: 'center' }]}>
           Set
         </Text>
-        <Text style={[styles.tableHeadingStyle, {textAlign: 'center'}]}>
+        <Text style={[styles.tableHeadingStyle, { textAlign: 'center' }]}>
           RTD
         </Text>
-        <Text style={[styles.tableHeadingStyle, {textAlign: 'right'}]}>
+        <Text style={[styles.tableHeadingStyle, { textAlign: 'right' }]}>
           Cal
         </Text>
       </View>
@@ -42,8 +40,9 @@ export default function ProgramTable(props) {
             <View style={styles.totalItemsView}>
               <TouchableOpacity
                 activeOpacity={0.6}
-                style={{width: '40%'}}
-                onPress={() => onEditExercise(item.type, index)}>
+                style={{ width: '40%' }}
+                onPress={() => onEditExercise(item.type, index)}
+              >
                 <Text
                   style={[
                     styles.textStyle,
@@ -51,17 +50,18 @@ export default function ProgramTable(props) {
                       color: isModal ? colors.white : colors.tertiary,
                       width: '100%',
                     },
-                  ]}>
+                  ]}
+                >
                   {item.exercise || 'Superset'}
                 </Text>
               </TouchableOpacity>
-              <Text style={[styles.textStyle2, {textAlign: 'center'}]}>
+              <Text style={[styles.textStyle2, { textAlign: 'center' }]}>
                 {item.set}
               </Text>
-              <Text style={[styles.textStyle2, {textAlign: 'center'}]}>
+              <Text style={[styles.textStyle2, { textAlign: 'center' }]}>
                 {item.rtd}
               </Text>
-              <Text style={[styles.textStyle2, {textAlign: 'right'}]}>
+              <Text style={[styles.textStyle2, { textAlign: 'right' }]}>
                 {item.cal && Math.round(parseFloat(item.cal, 10) * 100) / 100}
               </Text>
             </View>
@@ -78,21 +78,27 @@ export default function ProgramTable(props) {
                         flexDirection: 'row',
                         alignItems: 'center',
                         marginTop: index !== 0 ? 15 : 0,
-                      }}>
+                      }}
+                    >
                       <Text
                         style={[
                           styles.textStyle,
-                          {color: isModal ? colors.white : colors.textGrey},
-                        ]}>
+                          { color: isModal ? colors.white : colors.textGrey },
+                        ]}
+                      >
                         {i.exercise}
                       </Text>
-                      <Text style={[styles.textStyle2, {textAlign: 'center'}]}>
+                      <Text
+                        style={[styles.textStyle2, { textAlign: 'center' }]}
+                      >
                         {i.set}
                       </Text>
-                      <Text style={[styles.textStyle2, {textAlign: 'center'}]}>
+                      <Text
+                        style={[styles.textStyle2, { textAlign: 'center' }]}
+                      >
                         {i.amount} {i.unit}
                       </Text>
-                      <Text style={[styles.textStyle2, {textAlign: 'right'}]}>
+                      <Text style={[styles.textStyle2, { textAlign: 'right' }]}>
                         {Math.round(parseFloat(i.cal, 10) * 100) / 100}
                       </Text>
                     </View>
@@ -119,12 +125,14 @@ export default function ProgramTable(props) {
         <View style={styles.flexRowView}>
           <TouchableOpacity
             activeOpacity={0.6}
-            onPress={() => onEditExercise()}>
+            onPress={() => onEditExercise()}
+          >
             <Text
               style={[
                 styles.noteHeading,
-                {color: isModal ? colors.white : colors.tertiary},
-              ]}>
+                { color: isModal ? colors.white : colors.tertiary },
+              ]}
+            >
               Note:
             </Text>
           </TouchableOpacity>

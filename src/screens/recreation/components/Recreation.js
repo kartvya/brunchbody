@@ -1,10 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-nested-ternary */
-import React from 'react';
-import { Text, View, SafeAreaView, ScrollView, Image } from 'react-native';
 import PropTypes from 'prop-types';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
   AddWorkoutModal,
   CreateItemContent,
@@ -18,8 +15,8 @@ import {
   WheelPickerContent,
 } from '../../../components';
 import { colors, images } from '../../../resources';
-import MyRoutines from './MyRoutines';
 import BodyPlans from './BodyPlans';
+import MyRoutines from './MyRoutines';
 import MyWorkout from './MyWorkout';
 import styles from './style';
 

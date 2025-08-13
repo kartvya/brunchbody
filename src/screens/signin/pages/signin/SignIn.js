@@ -86,7 +86,6 @@ export default function SignInPage(props) {
     const regx = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
     if (email.trim() && password.trim()) {
-      console.log(!regx.test(email), 'emaiemaill');
       if (!regx.test(email)) {
         showMessage('Error!', 'Email address is badly formatted.');
       } else {

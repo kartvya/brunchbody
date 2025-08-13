@@ -49,7 +49,7 @@ export default function ProgramManagerPage(props) {
   const getWeekPlan = async () => {
     setLoader(true);
     if (program === 'Brunch Program') {
-      await onGetBrunchBodyWeekPlan(selectedItem.id, weekNumber);
+      await onGetBrunchBodyWeekPlan(selectedItem.name, weekNumber);
     } else {
       await onGetWeekPlan(selectedItem.id, weekNumber);
     }

@@ -23,6 +23,8 @@ import {
   GET_WORKOUTS,
 } from '../constants';
 import { serverUrl } from '../../config';
+import { getJSON } from '../../utils/storageUtils';
+import { STORAGE_KEYS } from '../../storage/mmkv/keys';
 
 export const getRoutines = () => async dispatch => {
   const idToken = await AsyncStorage.getItem('auth_token');
@@ -395,12 +397,26 @@ export const getBrunchBodyPlans = () => async dispatch => {
 };
 
 export const getBrunchBodyWeekPlan = (id, week) => async dispatch => {
-  if (request.success) {
-    dispatch({ type: GET_BRUNCH_BODY_WEEK_PLAN, payload: request.result });
-    return request.result;
+  const brunchPlans = getJSON(STORAGE_KEYS.PLANS.BRUNCH_BODY) || [];
+
+  const weekPlan = brunchPlans.find(item => item.name === id || item.id === id);
+
+  if (!weekPlan) {
+    console.warn(`Plan with id/name "${id}" not found`);
+    return null;
   }
 
-  return request.result || 'Something went wrong.';
+  const filteredWeeksData = weekPlan.weeksData.find(
+    w => Number(w.week) == week,
+  );
+
+  // const filteredPlan = {
+  //   ...weekPlan,
+  //   weeksData: filteredWeeksData,
+  // };
+
+  dispatch({ type: GET_BRUNCH_BODY_WEEK_PLAN, payload: filteredWeeksData });
+  return filteredWeeksData;
 };
 
 export const getWorkouts = () => async dispatch => {

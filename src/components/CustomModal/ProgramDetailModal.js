@@ -1,13 +1,13 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import CloseButton from '../CloseButton';
 import ProgramTable from '../ProgramTable';
 import TextButton from '../TextButton';
 import Button from '../Button';
-import {colors} from '../../resources';
+import { colors } from '../../resources';
 import styles from './NutritionStyle';
 
 export default function ProgramDetailModal(props) {
@@ -31,7 +31,7 @@ export default function ProgramDetailModal(props) {
     <View style={styles.container}>
       <View style={styles.header}>
         <View />
-        <View style={{alignItems: 'center'}}>
+        <View style={{ alignItems: 'center' }}>
           <Text style={styles.headingStyle}>
             {heading !== '' ? `"${heading}"` : null}
           </Text>
@@ -42,7 +42,7 @@ export default function ProgramDetailModal(props) {
         <CloseButton
           closeIconSize={25}
           iconColor={colors.nonEditableOverlays}
-          style={{backgroundColor: colors.white}}
+          style={{ backgroundColor: colors.white }}
           onPress={hideModal}
         />
       </View>
@@ -52,7 +52,7 @@ export default function ProgramDetailModal(props) {
           <ActivityIndicator
             size="large"
             color="white"
-            style={{marginTop: 20}}
+            style={{ marginTop: 20 }}
           />
         ) : programData.length === 0 ? (
           <View>

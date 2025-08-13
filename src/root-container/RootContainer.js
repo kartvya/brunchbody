@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { PaperProvider } from 'react-native-paper';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import RootNavigation from '../navigation/RootNavigation';
 import { persistor, store } from '../redux';
-import { PaperProvider } from 'react-native-paper';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { colors } from '../resources';
 
 export class RootContainer extends Component {

@@ -77,7 +77,6 @@ export default function CalendarPage(props) {
     clearedThemeDays,
   } = props;
 
-  console.log(user, 'useuseruseruserr');
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   const [visibleEdit, setvisibleEdit] = useState(false);

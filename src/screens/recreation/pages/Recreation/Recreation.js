@@ -158,7 +158,7 @@ export default function RecreationPage(props) {
         i => i.name.toLowerCase() === selectedItem.name.toLowerCase(),
       );
 
-      let res = await onGetBrunchBodyWeekPlan(plan.id, selectedItem.week);
+      let res = await onGetBrunchBodyWeekPlan(plan.name, selectedItem.week);
 
       if (res && Object.keys(res).length === 0) {
         const temp = myCustomPlans.find(i => i.id === plan.id);
@@ -169,7 +169,6 @@ export default function RecreationPage(props) {
       if (res && Object.keys(res).length) {
         const temp = await res?.weekDays?.find(i => i.day == selectedItem.day);
         const newPlan = await getPlan(temp);
-
         setSelectedItem({ ...selectedItem, plan: newPlan });
         setProgramPlanLoader(false);
       } else {
@@ -299,17 +298,20 @@ export default function RecreationPage(props) {
   };
 
   const onSelectWorkout = async workout => {
+    const newDate = moment({ year, month: month - 1, day: date }).toDate();
+
     const tempWeek =
-      (await getWeekOrDays(
-        new Date(workout.createdAt).toLocaleDateString(),
-        new Date(`${month}/${date}/${year}`).toLocaleDateString(),
+      parseInt(workout.week, 10) +
+      getWeekOrDays(
+        new Date(workout.createdAt),
+        new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()),
         true,
         parseInt(workout.day, 10),
-      )) + 1;
+      );
 
     const tempDay = await getWeekOrDays(
-      new Date(workout.createdAt).toLocaleDateString(),
-      new Date(`${month}/${date}/${year}`).toLocaleDateString(),
+      new Date(workout.createdAt),
+      new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate()),
       false,
       parseInt(workout.day, 10),
     );
@@ -325,15 +327,6 @@ export default function RecreationPage(props) {
 
   const incrementDate = () => {
     setIsDateSelected(true);
-
-    // const currentDayInMilli = new Date(
-    //   moment(`${year}/${month}/${date}`),
-    // ).getTime();
-    // const oneDay = 1000 * 60 * 60 * 24;
-    // const nextDayInMilli = currentDayInMilli + oneDay;
-    // const nextDate = new Date(nextDayInMilli);
-
-    // getMyWorkouts(nextDate);
     const current = new Date(year, month - 1, date);
     const prev = new Date(current);
     prev.setDate(current.getDate() + 1);
@@ -392,7 +385,6 @@ export default function RecreationPage(props) {
 
   const addMyWorkoutHandler = async () => {
     setLoader(true);
-
     if (`${year}-${month}-${date}` < moment().format('YYYY-M-D')) {
       setLoader(false);
       showMessage('Error!', `You cannot add workouts on past dates.`);
@@ -403,7 +395,7 @@ export default function RecreationPage(props) {
         `You can’t add duplicate workouts on the same day.`,
       );
     } else if (week.trim() && day.trim()) {
-      let res = await onGetBrunchBodyWeekPlan(selectedWorkout.id, week);
+      let res = await onGetBrunchBodyWeekPlan(selectedWorkout.name, week);
       if (!res) res = await onGetWeekPlan(selectedWorkout.id, week);
       const temp = myWeekPlan?.weekDays?.find(i => i.day == day);
       const plan = await getPlan(temp);
