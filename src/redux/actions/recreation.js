@@ -395,24 +395,8 @@ export const getBrunchBodyPlans = () => async dispatch => {
 };
 
 export const getBrunchBodyWeekPlan = (id, week) => async dispatch => {
-  const idToken = await AsyncStorage.getItem('auth_token');
-  const refreshToken = await AsyncStorage.getItem('refresh_token');
-
-  const request = await axios({
-    method: 'GET',
-    baseURL: serverUrl,
-    url: `api/user/getBrunchBodyWeekPlan/${id}/${week}`,
-    headers: {
-      auth_token: idToken,
-      refresh_token: refreshToken,
-    },
-  })
-    .then(res => res.data)
-    .catch(err => err.response.data);
-
   if (request.success) {
     dispatch({ type: GET_BRUNCH_BODY_WEEK_PLAN, payload: request.result });
-    // if (Object.keys(request.result).length > 0) return true;
     return request.result;
   }
 

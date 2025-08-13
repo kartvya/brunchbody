@@ -66,6 +66,7 @@ export default function MyWorkout(props) {
       </View>
       <FlatList
         data={myWorkout}
+        scrollEnabled={false}
         keyExtractor={item =>
           item.id?.toString() || `${item.name}-${item.createdAt}`
         }

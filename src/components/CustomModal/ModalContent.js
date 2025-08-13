@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './style';
 import Button from '../Button';
@@ -37,7 +37,8 @@ export default function ModalContent(props) {
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.bottomTextView}
-          onPress={onDeleteBtnPress}>
+          onPress={onDeleteBtnPress}
+        >
           <Text style={styles.textStyle3}>Delete</Text>
         </TouchableOpacity>
       )}
