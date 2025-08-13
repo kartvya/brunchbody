@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {AddButton, CustomText} from '../../../components';
+import { AddButton, CustomText } from '../../../components';
 import styles from './style';
+import moment from 'moment';
 
 export default function MyWorkout(props) {
   const {
@@ -26,6 +27,8 @@ export default function MyWorkout(props) {
     getWeekOrDays,
   } = props;
 
+  const newDate = moment({ year, month: month - 1, day: date }).toDate();
+
   return (
     <View style={styles.setMargin}>
       <Text style={styles.textStyle1}>Daily Reminder</Text>
@@ -43,7 +46,8 @@ export default function MyWorkout(props) {
           activeOpacity={0.5}
           onPress={() => {
             setDatePickerModal(true);
-          }}>
+          }}
+        >
           <Text style={styles.dateText}>
             {isDateSelected
               ? `${month}/${date}/${year}`
@@ -60,59 +64,94 @@ export default function MyWorkout(props) {
           />
         </TouchableOpacity>
       </View>
-
-      {myWorkout.map(item => (
-        <TouchableOpacity
-          key={item.id}
-          activeOpacity={0.5}
-          style={styles.textView}
-          onPress={() => {
-            setScreen('');
-            setBtnTitle('View');
-            setHeading(item.name);
-            setShowDeleteBtn(true);
-            onSelectWorkout(item);
-            setSubText(
-              `Week ${
-                parseInt(item.week, 10) +
-                getWeekOrDays(
-                  new Date(item.createdAt).toLocaleDateString(),
-                  new Date(`${month}/${date}/${year}`).toLocaleDateString(),
-                  true,
-                  parseInt(item.day, 10),
-                )
-              } Day ${getWeekOrDays(
-                new Date(item.createdAt).toLocaleDateString(),
-                new Date(`${month}/${date}/${year}`).toLocaleDateString(),
-                false,
-                parseInt(item.day, 10),
-              )}`,
-            );
-          }}>
-          <CustomText text={item.name} style={styles.setMargin3} />
-          <CustomText
-            text={
-              parseInt(item.week, 10) +
-              getWeekOrDays(
-                new Date(item.createdAt).toLocaleDateString(),
-                new Date(`${month}/${date}/${year}`).toLocaleDateString(),
-                true,
-                parseInt(item.day, 10),
-              )
-            }
-            style={styles.customTextStyle}
-          />
-          <CustomText
-            text={getWeekOrDays(
-              new Date(item.createdAt).toLocaleDateString(),
-              new Date(`${month}/${date}/${year}`).toLocaleDateString(),
-              false,
-              parseInt(item.day, 10),
-            )}
-            style={styles.customTextStyle}
-          />
-        </TouchableOpacity>
-      ))}
+      <FlatList
+        data={myWorkout}
+        keyExtractor={item =>
+          item.id?.toString() || `${item.name}-${item.createdAt}`
+        }
+        renderItem={({ item }) => {
+          const dayVal = Number(item.day) > 0 ? Number(item.day) : 1;
+          return (
+            <TouchableOpacity
+              activeOpacity={0.5}
+              style={styles.textView}
+              onPress={() => {
+                setScreen('');
+                setBtnTitle('View');
+                setHeading(item.name);
+                setShowDeleteBtn(true);
+                onSelectWorkout(item);
+                setSubText(
+                  `Week ${
+                    parseInt(item.week, 10) +
+                    getWeekOrDays(
+                      new Date(item.createdAt),
+                      new Date(
+                        newDate.getFullYear(),
+                        newDate.getMonth(),
+                        newDate.getDate(),
+                      ),
+                      true,
+                      parseInt(item.day, 10),
+                    )
+                  } Day ${getWeekOrDays(
+                    new Date(item.createdAt),
+                    new Date(
+                      newDate.getFullYear(),
+                      newDate.getMonth(),
+                      newDate.getDate(),
+                    ),
+                    false,
+                    dayVal,
+                  )}`,
+                );
+              }}
+            >
+              <CustomText text={item.name} style={styles.setMargin3} />
+              <CustomText
+                text={
+                  parseInt(item.week, 10) +
+                  getWeekOrDays(
+                    new Date(item.createdAt),
+                    new Date(
+                      newDate.getFullYear(),
+                      newDate.getMonth(),
+                      newDate.getDate(),
+                    ),
+                    true,
+                    parseInt(item.day, 10),
+                  )
+                }
+                style={styles.customTextStyle}
+              />
+              <CustomText
+                text={getWeekOrDays(
+                  new Date(item.createdAt),
+                  new Date(
+                    newDate.getFullYear(),
+                    newDate.getMonth(),
+                    newDate.getDate(),
+                  ),
+                  false,
+                  dayVal,
+                )}
+                style={styles.customTextStyle}
+              />
+            </TouchableOpacity>
+          );
+        }}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        removeClippedSubviews={true}
+        updateCellsBatchingPeriod={50}
+        getItemLayout={(data, index) => ({
+          length: 80,
+          offset: 80 * index,
+          index,
+        })}
+        showsVerticalScrollIndicator={false}
+      />
 
       <View style={styles.setMargin2}>
         <AddButton

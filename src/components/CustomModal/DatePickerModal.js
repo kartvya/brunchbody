@@ -29,12 +29,11 @@ export default function DatePickerModal(props) {
         <View style={styles.wheelPickerView2}>
           <DatePicker
             style={styles.wheelPickerStyle}
-            onDateChange={setSelectedDateStr}
+            onDateChange={date => {
+              console.log(date.getDate());
+              setSelectedDateStr(date);
+            }}
             selectTextColor={colors.brightGreen}
-            selectedDate={new Date()}
-            minimumDate={new Date('1970-01-01')}
-            maximumDate={new Date()}
-            // itemStyle={{font}}
           />
         </View>
 

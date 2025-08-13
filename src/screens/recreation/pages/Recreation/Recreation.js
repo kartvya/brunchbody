@@ -1,9 +1,3 @@
-/* eslint-disable no-lonely-if */
-/* eslint-disable no-unused-vars */
-/* eslint-disable eqeqeq */
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-use-before-define */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -30,6 +24,7 @@ import {
   mergeExercises,
   profile,
 } from '../../../../redux/actions';
+import { useTodayKey } from '../../../../context/DateProvider';
 
 const workoutOptionsData = [
   { id: 1, name: 'BRUNCH BODY' },
@@ -97,6 +92,19 @@ export default function RecreationPage(props) {
     user,
     allExercises,
   } = props;
+
+  const {
+    today,
+    date,
+    month,
+    year,
+    todoListDate,
+    setDate,
+    setMonth,
+    setYear,
+    setTodoListDate,
+    resetToToday,
+  } = useTodayKey();
   // console.log('myWorkouts: ', myWorkouts);
   const [tab, setTab] = useState(1);
   const [loader, setLoader] = useState(false);
@@ -124,9 +132,6 @@ export default function RecreationPage(props) {
   const [isProgramDetailModal, setIsProgramDetailModal] = useState(false);
   const [datePickerModal, setDatePickerModal] = useState(false);
   const [isDateSelected, setIsDateSelected] = useState(false);
-  const [date, setDate] = useState(new Date().getDate());
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [year, setYear] = useState(new Date().getFullYear());
   const [programMenuModal, setProgramMenuModal] = useState(false);
   const [programPlanLoader, setProgramPlanLoader] = useState(false);
   const [selectedProgramMenuOption, setSelectedProgramMenuOption] =
@@ -175,7 +180,8 @@ export default function RecreationPage(props) {
   };
 
   useEffect(() => {
-    getMyWorkouts(moment(`${year}/${month}/${date}`).format());
+    const selectedDate = `${year}/${month}/${date}`;
+    getMyWorkouts(moment(selectedDate, 'YYYY/M/D').format());
   }, [myWorkouts, user]);
 
   const getAllData = async () => {
@@ -213,45 +219,36 @@ export default function RecreationPage(props) {
   };
 
   const getWeekOrDays = (createdAt, changeDate, isWeek, createdDay) => {
-    const startDate = moment(createdAt)
-      .set({
-        hour: 0,
-        minute: 0,
-        second: 0,
-        millisecond: 0,
-      })
-      .utc(true);
-    const endDate = moment(changeDate).utc(true);
+    const startDate = moment(createdAt).startOf('day').utc(true);
+    const endDate = moment(changeDate).startOf('day').utc(true);
     const duration = moment.duration(endDate.diff(startDate));
+
     return isWeek
-      ? parseInt((parseInt(duration.asDays(), 10) + createdDay - 1) / 7, 10)
-      : ((parseInt(duration.asDays(), 10) + createdDay - 1) % 7) + 1;
+      ? Math.floor((duration.asDays() + createdDay - 1) / 7)
+      : ((duration.asDays() + createdDay - 1) % 7) + 1;
   };
 
   const getMyWorkouts = currentDate => {
-    const newDate = new Date(currentDate);
-    setDate(newDate.getDate());
-    setMonth(newDate.getMonth() + 1);
-    setYear(newDate.getFullYear());
+    const newDate = moment(currentDate).toDate();
     getDaysInMonth(newDate.getMonth() + 1);
 
     const { completedWorkouts = {}, deletedWorkouts = {} } = user;
     const d = moment(currentDate).format('YYYY-MM-DD');
-
     const temp = [...myWorkouts].filter(i => {
       const workoutCurrentWeek =
         parseInt(i.week, 10) +
         getWeekOrDays(
-          new Date(i.createdAt).toLocaleDateString(),
+          new Date(i.createdAt), // pass Date directly
           new Date(
-            `${
-              newDate.getMonth() + 1
-            }/${newDate.getDate()}/${newDate.getFullYear()}`,
-          ).toLocaleDateString(),
+            newDate.getFullYear(),
+            newDate.getMonth(),
+            newDate.getDate(),
+          ),
           true,
           parseInt(i.day, 10),
         );
 
+      console.log(workoutCurrentWeek, 'workoutCurrentWeeworkoutCurrentWeekk');
       if (workoutCurrentWeek <= parseInt(i.totalWeeks, 10)) {
         if (i.sequence === 'SINGLE WORKOUT') {
           if (
@@ -329,33 +326,38 @@ export default function RecreationPage(props) {
   const incrementDate = () => {
     setIsDateSelected(true);
 
-    const currentDayInMilli = new Date(
-      moment(`${year}/${month}/${date}`),
-    ).getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    const nextDayInMilli = currentDayInMilli + oneDay;
-    const nextDate = new Date(nextDayInMilli);
+    // const currentDayInMilli = new Date(
+    //   moment(`${year}/${month}/${date}`),
+    // ).getTime();
+    // const oneDay = 1000 * 60 * 60 * 24;
+    // const nextDayInMilli = currentDayInMilli + oneDay;
+    // const nextDate = new Date(nextDayInMilli);
 
-    getMyWorkouts(nextDate);
+    // getMyWorkouts(nextDate);
+    const current = new Date(year, month - 1, date);
+    const prev = new Date(current);
+    prev.setDate(current.getDate() + 1);
+    setDate(prev.getDate());
+    setMonth(prev.getMonth() + 1);
+    setYear(prev.getFullYear());
+    getMyWorkouts(prev);
   };
 
   const decrementDate = () => {
     setIsDateSelected(true);
-
-    const currentDayInMilli = new Date(
-      moment(`${year}/${month}/${date}`),
-    ).getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    const previousDayInMilli = currentDayInMilli - oneDay;
-    const previousDate = new Date(previousDayInMilli);
-
-    getMyWorkouts(previousDate);
+    const current = new Date(year, month - 1, date);
+    const prev = new Date(current);
+    prev.setDate(current.getDate() - 1);
+    setDate(prev.getDate());
+    setMonth(prev.getMonth() + 1);
+    setYear(prev.getFullYear());
+    getMyWorkouts(prev);
   };
 
-  const onConfirmDatePicker = () => {
+  const onConfirmDatePicker = parcedDate => {
     setIsDateSelected(true);
     setDatePickerModal(false);
-    getMyWorkouts(moment(`${year}/${month}/${date}`).format());
+    getMyWorkouts(parcedDate);
   };
 
   const onCancelDatePicker = () => {
@@ -405,7 +407,6 @@ export default function RecreationPage(props) {
       if (!res) res = await onGetWeekPlan(selectedWorkout.id, week);
       const temp = myWeekPlan?.weekDays?.find(i => i.day == day);
       const plan = await getPlan(temp);
-
       const response = await onAddMyWorkout({
         day,
         week,
@@ -414,7 +415,7 @@ export default function RecreationPage(props) {
         deletedWorkout: [],
         name: selectedWorkout.name,
         sequence: selectedSequence,
-        createdAt: moment(`${year}/${month}/${date}`).format(),
+        createdAt: moment([year, month - 1, date]).format(),
         totalWeeks: selectedWorkout?.weeks || selectedWorkout?.numOfWeeks,
       });
 

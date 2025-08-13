@@ -22,7 +22,7 @@ import {
   GET_WEEK_PLAN,
   GET_WORKOUTS,
 } from '../constants';
-import {serverUrl} from '../../config';
+import { serverUrl } from '../../config';
 
 export const getRoutines = () => async dispatch => {
   const idToken = await AsyncStorage.getItem('auth_token');
@@ -41,7 +41,7 @@ export const getRoutines = () => async dispatch => {
     .catch(err => err.response.data);
 
   if (request.success) {
-    dispatch({type: GET_ROUTINES, payload: request.result});
+    dispatch({ type: GET_ROUTINES, payload: request.result });
     return true;
   }
 
@@ -66,7 +66,7 @@ export const addRoutine = data => async dispatch => {
   //   .catch(err => err.response.data);
 
   // if (request.success) {
-  await dispatch({type: ADD_ROUTINE, payload: data});
+  await dispatch({ type: ADD_ROUTINE, payload: data });
   return true;
   // }
 
@@ -90,7 +90,7 @@ export const deleteRoutine = id => async dispatch => {
   //   .catch(err => err.response.data);
 
   // if (request.success) {
-  await dispatch({type: DELETE_ROUTINE, payload: {id}});
+  await dispatch({ type: DELETE_ROUTINE, payload: { id } });
   return true;
   // }
 
@@ -115,7 +115,7 @@ export const getRoutineTasks = id => async dispatch => {
 
   // if (request.success) {
   //   dispatch({type: GET_ROUTINE_ITEMS, payload: request.result});
-  await dispatch({type: GET_ROUTINE_ITEMS, payload: {id}});
+  await dispatch({ type: GET_ROUTINE_ITEMS, payload: { id } });
   return true;
   // }
 
@@ -141,7 +141,7 @@ export const addRoutineTask = (id, data) => async dispatch => {
 
   // if (request.success) {
   //   await dispatch(getRoutineTasks(id));
-  await dispatch({type: ADD_ROUTINE_ITEMS, payload: {id, data}});
+  await dispatch({ type: ADD_ROUTINE_ITEMS, payload: { id, data } });
   return true;
   // }
 
@@ -167,7 +167,7 @@ export const editRoutineTask = data => async dispatch => {
 
   // if (request.success) {
   //   await dispatch(getRoutineTasks(data.routine_id));
-  await dispatch({type: EDIT_ROUTINE_ITEMS, payload: data});
+  await dispatch({ type: EDIT_ROUTINE_ITEMS, payload: data });
   return true;
   // }
 
@@ -193,7 +193,7 @@ export const deleteRoutineTask = data => async dispatch => {
 
   // if (request.success) {
   //   await dispatch(getRoutineTasks(data.routine_id));
-  await dispatch({type: DELETE_ROUTINE_ITEMS, payload: data});
+  await dispatch({ type: DELETE_ROUTINE_ITEMS, payload: data });
   return true;
   // }
 
@@ -231,7 +231,7 @@ export const getCustomPlans = () => async dispatch => {
       .catch(err => err.response.data);
 
     if (request.success) {
-      dispatch({type: GET_CUSTOM_PLANS, payload: request.result});
+      dispatch({ type: GET_CUSTOM_PLANS, payload: request.result });
       return true;
     }
 
@@ -260,7 +260,7 @@ export const addCustomPlan = data => async dispatch => {
 
   // if (request.success) {
   //   await dispatch(getCustomPlans());
-  await dispatch({type: ADD_CUSTOM_PLANS, payload: data});
+  await dispatch({ type: ADD_CUSTOM_PLANS, payload: data });
   return true;
   // }
 
@@ -285,7 +285,7 @@ export const deleteCustomPlan = id => async dispatch => {
 
   // if (request.success) {
   //   await dispatch(getCustomPlans());
-  await dispatch({type: DELETE_CUSTOM_PLANS, payload: {id}});
+  await dispatch({ type: DELETE_CUSTOM_PLANS, payload: { id } });
   return true;
   // }
 
@@ -309,7 +309,7 @@ export const getWeekPlans = (id, week) => async dispatch => {
   //   .catch(err => err.response.data);
 
   // if (request.success) {
-  await dispatch({type: GET_WEEK_PLAN, payload: {id, week}});
+  await dispatch({ type: GET_WEEK_PLAN, payload: { id, week } });
   // if (Object.keys(request.result).length > 0) return true;
   return true;
   // }
@@ -335,8 +335,8 @@ export const addWeekPlan = (id, data) => async dispatch => {
   //   .catch(err => err.response.data);
 
   // if (request.success) {
-  await dispatch({type: ADD_WEEK_PLAN, payload: {id, data}});
-  await dispatch({type: GET_WEEK_PLAN, payload: {id, week: data.week}});
+  await dispatch({ type: ADD_WEEK_PLAN, payload: { id, data } });
+  await dispatch({ type: GET_WEEK_PLAN, payload: { id, week: data.week } });
   return true;
   // }
 
@@ -362,8 +362,8 @@ export const editWeekPlan = (id, weekId, data) => async dispatch => {
 
   // if (request.success) {
   //   dispatch(getWeekPlans(id, data.week));
-  await dispatch({type: EDIT_WEEK_PLAN, payload: {id, weekId, data}});
-  await dispatch({type: GET_WEEK_PLAN, payload: {id, week: data.week}});
+  await dispatch({ type: EDIT_WEEK_PLAN, payload: { id, weekId, data } });
+  await dispatch({ type: GET_WEEK_PLAN, payload: { id, week: data.week } });
   return true;
   // }
 
@@ -387,7 +387,7 @@ export const getBrunchBodyPlans = () => async dispatch => {
     .catch(err => err.response.data);
 
   if (request.success) {
-    dispatch({type: GET_BRUNCH_BODY_PLANS, payload: request.result});
+    dispatch({ type: GET_BRUNCH_BODY_PLANS, payload: request.result });
     return true;
   }
 
@@ -411,7 +411,7 @@ export const getBrunchBodyWeekPlan = (id, week) => async dispatch => {
     .catch(err => err.response.data);
 
   if (request.success) {
-    dispatch({type: GET_BRUNCH_BODY_WEEK_PLAN, payload: request.result});
+    dispatch({ type: GET_BRUNCH_BODY_WEEK_PLAN, payload: request.result });
     // if (Object.keys(request.result).length > 0) return true;
     return request.result;
   }
@@ -449,7 +449,7 @@ export const getWorkouts = () => async dispatch => {
       .catch(err => err.response.data);
 
     if (request.success) {
-      dispatch({type: GET_WORKOUTS, payload: request.result});
+      dispatch({ type: GET_WORKOUTS, payload: request.result });
       return true;
     }
 
@@ -460,28 +460,9 @@ export const getWorkouts = () => async dispatch => {
 };
 
 export const addMyWorkout = data => async dispatch => {
-  // const idToken = await AsyncStorage.getItem('auth_token');
-  // const refreshToken = await AsyncStorage.getItem('refresh_token');
-
-  // const request = await axios({
-  //   method: 'POST',
-  //   baseURL: serverUrl,
-  //   url: `api/user/addMyWorkout`,
-  //   data,
-  //   headers: {
-  //     auth_token: idToken,
-  //     refresh_token: refreshToken,
-  //   },
-  // })
-  //   .then(res => res.data)
-  //   .catch(err => err.response.data);
-
-  // if (request.success) {
-  dispatch({type: ADD_WORKOUT, payload: {data}});
+  console.log(data, 'data');
+  dispatch({ type: ADD_WORKOUT, payload: { data } });
   return true;
-  // }
-
-  // return request.result || 'Something went wrong.';
 };
 
 export const editMyWorkout = (id, data) => async dispatch => {
@@ -502,7 +483,7 @@ export const editMyWorkout = (id, data) => async dispatch => {
     .catch(err => err.response.data);
   console.log('request: ', request);
   if (request.success) {
-    dispatch({type: EDIT_WORKOUT, payload: request.result});
+    dispatch({ type: EDIT_WORKOUT, payload: request.result });
     return true;
   }
 
@@ -526,7 +507,7 @@ export const deleteMyWorkout = id => async dispatch => {
   //   .catch(err => err.response.data);
 
   // if (request.success) {
-  dispatch({type: DELETE_WORKOUT, payload: {id}});
+  dispatch({ type: DELETE_WORKOUT, payload: { id } });
   return true;
   // }
 
@@ -552,7 +533,7 @@ export const addCompletedWorkout = data => async dispatch => {
 
   // if (request.success) {
   //   await dispatch(getCustomPlans());
-  await dispatch({type: ADD_COMPLETED_WORKOUT, payload: data});
+  await dispatch({ type: ADD_COMPLETED_WORKOUT, payload: data });
   return true;
   // }
 

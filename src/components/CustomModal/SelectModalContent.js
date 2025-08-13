@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-nested-ternary */
 import React from 'react';
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
-import {RadioButton} from 'react-native-paper';
+import { RadioButton } from 'react-native-paper';
 import CloseButton from '../CloseButton';
 import CustomOptions from '../CustomOptions';
 import AddButton from '../AddButton';
 import Button from '../Button';
-import {colors} from '../../resources';
+import { colors } from '../../resources';
 import styles from './style';
 
 export default function SelectModalContent(props) {
@@ -72,7 +72,8 @@ export default function SelectModalContent(props) {
                 onOptionSelect(
                   returnItem ? item : item.option || item.title || item.name,
                 )
-              }>
+              }
+            >
               <RadioButton.Android
                 value="Theme"
                 status={

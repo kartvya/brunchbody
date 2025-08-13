@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {colors} from '../../resources';
+import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { colors } from '../../resources';
 
 export default StyleSheet.create({
   modalContainer: {
@@ -75,6 +75,7 @@ export default StyleSheet.create({
   wheelPickerStyle: {
     width: '100%',
     height: RFValue(200),
+    backgroundColor: colors.background,
   },
   pickerItemStyle: {
     color: colors.white,
