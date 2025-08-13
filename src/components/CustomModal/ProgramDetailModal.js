@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
@@ -47,7 +45,35 @@ export default function ProgramDetailModal(props) {
         />
       </View>
 
-      {showTable ? (
+      {planLoader ? (
+        <ActivityIndicator
+          size="large"
+          color="white"
+          style={{ marginTop: 20 }}
+        />
+      ) : programData.length > 0 ? (
+        <ProgramTable
+          isModal
+          isNote={isNote}
+          data={completedWorkout || programData}
+        />
+      ) : (
+        <View style={{padding: 16}}>
+          <Text style={{color: colors.white, textAlign: 'center'}}>No exercises for this day</Text>
+        </View>
+      )}
+      {btnTitle && btnTitle.trim() !== '' ? (
+        <View style={styles.btnView2}>
+          <Button loader={loader} title={btnTitle} onPress={onBtnPress} />
+        </View>
+      ) : null}
+      {isDeleteBtn && (
+        <View style={styles.bottomTextView}>
+          <TextButton onPress={onDeleteBtnPress} title="Delete" />
+        </View>
+      )}1
+
+      {/* {showTable ? (
         planLoader ? (
           <ActivityIndicator
             size="large"
@@ -82,7 +108,7 @@ export default function ProgramDetailModal(props) {
         <View style={styles.bottomTextView}>
           <TextButton onPress={onDeleteBtnPress} title="Delete" />
         </View>
-      )}
+      )} */}
     </View>
   );
 }
