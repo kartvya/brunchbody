@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Recreation } from '../../components';
@@ -25,6 +25,7 @@ import {
   profile,
 } from '../../../../redux/actions';
 import { useTodayKey } from '../../../../context/DateProvider';
+import { SET_USER } from '../../../../redux/constants';
 
 const workoutOptionsData = [
   { id: 1, name: 'BRUNCH BODY' },
@@ -91,6 +92,7 @@ export default function RecreationPage(props) {
     onCompleteWorkout,
     user,
     allExercises,
+    completedWorkouts,
   } = props;
 
   const {
@@ -105,7 +107,7 @@ export default function RecreationPage(props) {
     setTodoListDate,
     resetToToday,
   } = useTodayKey();
-  // console.log('myWorkouts: ', myWorkouts);
+
   const [tab, setTab] = useState(1);
   const [loader, setLoader] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
@@ -145,6 +147,8 @@ export default function RecreationPage(props) {
   const [daysInMonth, setDaysInMonth] = useState(0);
   const [check, setCheck] = useState('');
   const [workouts, setWorkouts] = useState([]);
+
+  const dispatch = useDispatch();
 
   const onNavigate = async () => {
     if (screen) {
@@ -247,7 +251,6 @@ export default function RecreationPage(props) {
           parseInt(i.day, 10),
         );
 
-      console.log(workoutCurrentWeek, 'workoutCurrentWeeworkoutCurrentWeekk');
       if (workoutCurrentWeek <= parseInt(i.totalWeeks, 10)) {
         if (i.sequence === 'SINGLE WORKOUT') {
           if (
@@ -596,63 +599,53 @@ export default function RecreationPage(props) {
 
   const onMarkWorkoutComplete = async () => {
     setLoader(true);
-
-    // const response = await onEditMyWorkout(selectedItem.id, {
-    //   completed: [
-    //     ...selectedItem.completed,
-    //     moment(`${year}/${month}/${date}`).format(),
-    //   ],
-    // });
-
-    if (
-      moment(`${year}/${month}/${date}`).format('YYYY-MM-DD') <=
-      moment().format('YYYY-MM-DD')
-    ) {
-      const response = await updateUserProfile({
-        completedWorkouts: user?.completedWorkouts
-          ? {
-              ...user?.completedWorkouts,
-              [selectedItem.name]: user?.completedWorkouts[selectedItem.name]
-                ? [
-                    ...user?.completedWorkouts[selectedItem.name],
-                    moment(`${year}/${month}/${date}`).format('YYYY-MM-DD'),
-                  ]
-                : [moment(`${year}/${month}/${date}`).format('YYYY-MM-DD')],
-            }
-          : {
-              [selectedItem.name]: [
-                moment(`${year}/${month}/${date}`).format('YYYY-MM-DD'),
-              ],
-            },
+    try {
+      const completedDate = moment().format('YYYY-MM-DD');
+      const week = parseInt(selectedItem?.week) || 1;
+      const day = parseInt(selectedItem?.day) || 1;
+      const updatedCompletedWorkouts = user?.completedWorkouts
+        ? {
+            ...user?.completedWorkouts,
+            [selectedItem.name]: user?.completedWorkouts[selectedItem.name]
+              ? [
+                  ...user?.completedWorkouts[selectedItem.name],
+                  moment(`${year}/${month}/${date}`, 'YYYY/MM/DD').format(
+                    'YYYY-MM-DD',
+                  ),
+                ]
+              : [
+                  moment(`${year}/${month}/${date}`, 'YYYY/MM/DD').format(
+                    'YYYY-MM-DD',
+                  ),
+                ],
+          }
+        : {
+            [selectedItem.name]: [
+              moment(`${year}/${month}/${date}`, 'YYYY/MM/DD').format(
+                'YYYY-MM-DD',
+              ),
+            ],
+          };
+      dispatch({
+        type: SET_USER,
+        payload: { ...user, completedWorkouts: updatedCompletedWorkouts },
       });
-
-      if (response === true) {
-        setCheck('');
-        setScreen('');
-        setLoader(false);
-        setIsVisible(false);
-        setPermissionModal(false);
-        setIsProgramDetailModal(false);
-        showMessage('Success!', 'Workout marked completed successfully.');
-
-        await onCompleteWorkout({
-          ...selectedItem,
-          completedDate: moment(`${year}/${month}/${date}`).format(),
-        });
-      } else {
-        setCheck('');
-        setScreen('');
-        setLoader(false);
-        showMessage('Error!', response);
-      }
-    } else {
+      await onCompleteWorkout({
+        ...selectedItem,
+        completedDate: moment().format('YYYY-MM-DD'),
+      });
+      await onDeleteWorkout(selectedItem.id);
       setCheck('');
       setScreen('');
       setLoader(false);
-      showMessage(
-        'Error!',
-        `You can't mark workout complete for the future dates.`,
-      );
+      setIsVisible(false);
+      setPermissionModal(false);
+      setIsProgramDetailModal(false);
+      showMessage('Success!', 'Workout completed successfully.');
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoader(false);
     }
   };
 
@@ -867,6 +860,7 @@ RecreationPage.propTypes = {
   onCompleteWorkout: PropTypes.func.isRequired,
   user: PropTypes.objectOf(PropTypes.any).isRequired,
   allExercises: PropTypes.arrayOf(PropTypes.any).isRequired,
+  completedWorkouts: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -877,6 +871,7 @@ const mapStateToProps = state => ({
   myCustomPlans: state.recreation?.customPlans,
   brunchBodyPlans: state.recreation?.brunchBodyPlans,
   allExercises: state.exercise?.wholeExercises,
+  completedWorkouts: state.recreation?.completedWorkouts,
 });
 
 const mapDispatchToProps = dispatch => ({

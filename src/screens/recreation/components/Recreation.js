@@ -278,6 +278,7 @@ export default function Recreation(props) {
             isNote={false}
             heading={heading}
             subHeading={subText}
+            showTable={true}
             planLoader={programPlanLoader}
             onBtnPress={onMarkWorkoutComplete}
             programData={selectedItem?.plan || []}

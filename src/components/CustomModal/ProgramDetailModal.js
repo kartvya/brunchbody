@@ -44,6 +44,23 @@ export default function ProgramDetailModal(props) {
           onPress={hideModal}
         />
       </View>
+      {/* {planLoader ? (
+        <ActivityIndicator
+          size="large"
+          color="white"
+          style={{ marginTop: 20 }}
+        />
+      ) : programData.length === 0 ? (
+        <View>
+          <Text style={styles.restingTextStyle}>Resting Day</Text>
+        </View>
+      ) : (
+        <ProgramTable
+          isModal
+          isNote={isNote}
+          data={completedWorkout || programData}
+        />
+      )} */}
 
       {planLoader ? (
         <ActivityIndicator

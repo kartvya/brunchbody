@@ -1,14 +1,7 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable consistent-return */
-/* eslint-disable no-unused-vars */
-/* eslint-disable array-callback-return */
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import { colors } from '../../../../resources';
-import { Calories } from '../../components';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -16,6 +9,8 @@ import {
   getMealItems,
   getWorkouts,
 } from '../../../../redux/actions';
+import { colors } from '../../../../resources';
+import { Calories } from '../../components';
 
 const selectOptions = [
   { id: 1, option: 'FROM MEALS' },
@@ -81,6 +76,8 @@ export default function CaloriesPage(props) {
     myCompletedWorkouts,
     user,
   } = props;
+
+  console.log(myCompletedWorkouts, 'myCompletedWorkoutmyCompletedWorkoutss');
   const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [modalLoader, setModalLoader] = useState(false);
@@ -146,28 +143,12 @@ export default function CaloriesPage(props) {
   };
 
   const getMyWorkouts = async () => {
-    // await onGetMyWorkouts();
-    // console.log('myCompletedWorkouts: ', myCompletedWorkouts);
-
     const temp = [];
     const d = entryData.date || new Date();
-
     const filteredWorkouts = [...myCompletedWorkouts].filter(i => {
-      // if (i.completed.length > 0) {
-      //   const index = i.completed.findIndex(
-      //     a =>
-      //       moment(a).format('YYYY-MM-DD') === moment(d).format('YYYY-MM-DD'),
-      //   );
-      //   if (index !== -1) return i;
-      // }
-      if (
-        moment(i.completedDate).format('YYYY-MM-DD') ===
-        moment(d).format('YYYY-MM-DD')
-      )
+      if (i.completedDate === moment(d, 'YYYY/MM/DD').format('YYYY-MM-DD'))
         return i;
     });
-    // console.log('filteredWorkouts: ', filteredWorkouts);
-
     if (entryData?.completedWorkouts?.length > 0) {
       setCompletedWorkoutData(entryData.completedWorkouts);
       let calSum = 0;
