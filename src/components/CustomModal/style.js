@@ -286,4 +286,10 @@ export default StyleSheet.create({
     borderColor: colors.secondary,
     backgroundColor: colors.nonEditableOverlays,
   },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

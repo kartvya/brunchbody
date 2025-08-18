@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import {View, Text, SafeAreaView, ScrollView} from 'react-native';
 import PropTypes from 'prop-types';
+import { ScrollView, Text, View } from 'react-native';
 import {
   CustomHeader,
   CustomModal,
@@ -9,12 +8,13 @@ import {
   PermissionModal,
   TimePickerModal,
 } from '../../../components';
-import {colors, wheelPickerItems} from '../../../resources';
+import { colors, wheelPickerItems } from '../../../resources';
+import Picker from '../../calendar/components/ColorPicker';
 import EditEvent from './EditEvent';
 import Itinerary from './Itinerary';
 import TimeBlock from './TimeBlock';
 import styles from './style';
-import Picker from '../../calendar/components/ColorPicker';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function NewDay(props) {
   const {

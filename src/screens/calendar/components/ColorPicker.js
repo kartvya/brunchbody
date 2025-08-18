@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import {
-  Dimensions,
-  Modal,
-  ScrollView,
-  Text,
-  View
-} from 'react-native';
-import { Headline } from 'react-native-paper';
+import { Dimensions, ScrollView, Text, View } from 'react-native';
+import { Headline, Modal } from 'react-native-paper';
 import WheelColorPicker from 'react-native-wheel-color-picker';
 import { colors, strings } from '../../../resources';
 import CloseIcon from './CloseIcon';
@@ -23,15 +16,20 @@ const Picker = ({
 }) => (
   <Modal
     visible={visibleColorPicker}
-    transparent
-    animationType="fade"
-    onRequestClose={closeColorPicker}
+    onDismiss={hideColorPicker}
+    contentContainerStyle={styles.editModalContainer}
   >
     <View style={styles.backdrop}>
       <View style={styles.editModalContainer}>
-        <ScrollView contentContainerStyle={{flexGrow: 1, paddingVertical: 10}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Headline style={styles.headline}>{strings.colorPicker.title}</Headline>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, paddingVertical: 10 }}
+        >
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Headline style={styles.headline}>
+              {strings.colorPicker.title}
+            </Headline>
             <CloseIcon onPress={hideColorPicker} />
           </View>
           <View>
@@ -45,8 +43,14 @@ const Picker = ({
                 height: 400,
               }}
             />
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 10}}>
-              <Text style={{fontSize: 24, color: colors.white, padding: 10}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                marginTop: 10,
+              }}
+            >
+              <Text style={{ fontSize: 24, color: colors.white, padding: 10 }}>
                 {strings.colorPicker.hex}
               </Text>
               <View style={styles.colorBackground}>

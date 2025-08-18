@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Modal, Text, TouchableOpacity, View } from 'react-native';
+import { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Picker } from 'react-native-wheel-pick';
 import { colors, wheelPickerItems } from '../../resources';
@@ -37,55 +37,50 @@ const TimePickerModal = ({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide">
-      <View style={styles.modalBackground}>
-        <View style={styles.wheelPickerContainer}>
-          <View style={styles.wheelPickerView2}>
-            {/* Hours Picker */}
-            <View style={{ width: RFValue(100) }}>
-              <Picker
-                style={styles.wheelPickerStyle}
-                selectedValue={selectedHour}
-                pickerData={hours}
-                onValueChange={val => setSelectedHour(val)}
-                selectTextColor={colors.brightGreen}
-              />
-            </View>
-
-            {/* Minutes Picker */}
-            <View style={{ width: RFValue(100) }}>
-              <Picker
-                style={styles.wheelPickerStyle}
-                selectedValue={selectedMinute}
-                pickerData={minutes}
-                onValueChange={val => setSelectedMinute(val)}
-                selectTextColor={colors.brightGreen}
-              />
-            </View>
-
-            {/* AM/PM Picker */}
-            <View style={{ width: RFValue(100) }}>
-              <Picker
-                style={styles.wheelPickerStyle}
-                selectedValue={selectedFormat}
-                pickerData={formats}
-                onValueChange={val => setSelectedFormat(val)}
-                selectTextColor={colors.brightGreen}
-              />
-            </View>
+    <View style={{ flex: 1 }}>
+      <View style={styles.wheelPickerContainer}>
+        <View style={styles.wheelPickerView2}>
+          <View style={{ flex: 1 }}>
+            <Picker
+              style={styles.wheelPickerStyle}
+              selectedValue={selectedHour}
+              pickerData={hours}
+              onValueChange={val => setSelectedHour(val)}
+              selectTextColor={colors.brightGreen}
+            />
           </View>
 
-          {/* Buttons */}
-          <TouchableOpacity style={styles.pickerBtnsView} onPress={confirm}>
-            <Text style={styles.confirmText}>Confirm</Text>
-          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <Picker
+              style={styles.wheelPickerStyle}
+              selectedValue={selectedMinute}
+              pickerData={minutes}
+              onValueChange={val => setSelectedMinute(val)}
+              selectTextColor={colors.brightGreen}
+            />
+          </View>
 
-          <TouchableOpacity style={styles.pickerBtnsView} onPress={onCancel}>
-            <Text style={styles.cancelText}>Cancel</Text>
-          </TouchableOpacity>
+          <View style={{ flex: 1 }}>
+            <Picker
+              style={styles.wheelPickerStyle}
+              selectedValue={selectedFormat}
+              pickerData={formats}
+              onValueChange={val => setSelectedFormat(val)}
+              selectTextColor={colors.brightGreen}
+            />
+          </View>
         </View>
+
+        {/* Buttons */}
+        <TouchableOpacity style={styles.pickerBtnsView} onPress={confirm}>
+          <Text style={styles.confirmText}>Confirm</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.pickerBtnsView} onPress={onCancel}>
+          <Text style={styles.cancelText}>Cancel</Text>
+        </TouchableOpacity>
       </View>
-    </Modal>
+    </View>
   );
 };
 

@@ -3,7 +3,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
@@ -45,6 +45,7 @@ import {
   DatePickerModal,
   ClearTheme,
 } from '../../../../components';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 let yearsList = [];
 let totalDays = 0;
@@ -635,7 +636,7 @@ export default function CalendarPage(props) {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.headingView}>
           <Text style={styles.headingText}>Calendar</Text>
         </View>

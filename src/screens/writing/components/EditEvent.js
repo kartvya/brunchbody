@@ -6,13 +6,13 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import {Modal, Headline} from 'react-native-paper';
+import { Modal, Headline } from 'react-native-paper';
 import PropTypes from 'prop-types';
 import styles from '../../calendar/components/style';
 import CloseIcon from '../../calendar/components/CloseIcon';
 import ModalButton from '../../calendar/components/ModalButton';
-import {strings, colors} from '../../../resources';
-import {TextButton} from '../../../components';
+import { strings, colors } from '../../../resources';
+import { TextButton } from '../../../components';
 
 const EditEvent = ({
   visibilityEditEvent,
@@ -43,11 +43,13 @@ const EditEvent = ({
   <Modal
     visible={visibilityEditEvent}
     onDismiss={hideEditEvent}
-    contentContainerStyle={styles.editModalContainer}>
+    contentContainerStyle={styles.editModalContainer}
+  >
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{flexGrow: 1, paddingVertical: 10}}>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      contentContainerStyle={{ flexGrow: 1, paddingVertical: 10 }}
+    >
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Headline style={styles.headline}>{modalHeading}</Headline>
         <CloseIcon onPress={hideEditEvent} />
       </View>
@@ -63,7 +65,7 @@ const EditEvent = ({
         {strings.createEvent.traitColor}
       </Headline>
 
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <Text style={styles.modalTaskText}>{colorTheme}</Text>
         <TouchableOpacity onPress={showColorPicker}>
           <View
@@ -81,22 +83,24 @@ const EditEvent = ({
       <Headline style={styles.editTitle}>
         {strings.createEvent.eventTime}
       </Headline>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <Text style={styles.modalText}>{strings.createEvent.starts}</Text>
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => setFromTimePickerModal(true)}>
-          <Text style={{color: colors.tertiary, fontSize: 16, margin: 5}}>
+          onPress={() => setFromTimePickerModal(true)}
+        >
+          <Text style={{ color: colors.tertiary, fontSize: 16, margin: 5 }}>
             {fromHours}:{fromMinutes} {fromTimeFormat}
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <Text style={styles.modalText}>{strings.createEvent.ends}</Text>
         <TouchableOpacity
           activeOpacity={0.5}
-          onPress={() => setToTimePickerModal(true)}>
-          <Text style={{color: colors.tertiary, fontSize: 16, margin: 5}}>
+          onPress={() => setToTimePickerModal(true)}
+        >
+          <Text style={{ color: colors.tertiary, fontSize: 16, margin: 5 }}>
             {toHours}:{toMinutes} {toTimeFormat}
           </Text>
         </TouchableOpacity>

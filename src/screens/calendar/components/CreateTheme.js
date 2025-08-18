@@ -1,11 +1,10 @@
-import React from 'react';
-import {TouchableOpacity, View, TextInput} from 'react-native';
-import {Modal, Portal, Text, Provider, Headline} from 'react-native-paper';
 import PropTypes from 'prop-types';
-import {colors, strings} from '../../../resources';
-import styles from './style';
-import ModalButton from './ModalButton';
+import { TextInput, TouchableOpacity, View } from 'react-native';
+import { Headline, Modal, Portal, Text } from 'react-native-paper';
+import { colors, strings } from '../../../resources';
 import CloseIcon from './CloseIcon';
+import ModalButton from './ModalButton';
+import styles from './style';
 
 const CreateTheme = ({
   visibleCreateTheme,
@@ -17,54 +16,51 @@ const CreateTheme = ({
   loader,
   value,
 }) => (
-  <Provider>
-    <Portal>
-      <Modal
-        visible={visibleCreateTheme}
-        onDismiss={hideCreateTheme}
-        contentContainerStyle={styles.editModalContainer}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Headline style={styles.headline}>
-            {strings.createTheme.title}
-          </Headline>
-          <CloseIcon onPress={hideCreateTheme} />
-        </View>
-        <Headline style={styles.editTitle}>
-          {strings.createTheme.newTheme}
-        </Headline>
-        <TextInput
-          value={value}
-          placeholder="Enter Name"
-          placeholderTextColor={colors.grey}
-          onChangeText={text => onChangeText(text)}
-          style={styles.input}
-        />
-        <Headline style={styles.editTitle}>
-          {strings.createTheme.themeColor}
-        </Headline>
-        <View style={{flexDirection: 'row'}}>
-          <Text style={styles.modalTaskText}>{newColor}</Text>
-          <TouchableOpacity onPress={showColorPicker}>
-            <View
-              style={{
-                width: 40,
-                height: 40,
-                marginLeft: 10,
-                borderWidth: 2,
-                borderColor: colors.black,
-                backgroundColor: newColor,
-              }}
-            />
-          </TouchableOpacity>
-        </View>
-        <ModalButton
-          loader={loader}
-          onPress={onCreateTheme}
-          label={strings.button.create}
-        />
-      </Modal>
-    </Portal>
-  </Provider>
+  <Portal>
+    <Modal
+      visible={visibleCreateTheme}
+      onDismiss={hideCreateTheme}
+      contentContainerStyle={styles.editModalContainer}
+    >
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+        <Headline style={styles.headline}>{strings.createTheme.title}</Headline>
+        <CloseIcon onPress={hideCreateTheme} />
+      </View>
+      <Headline style={styles.editTitle}>
+        {strings.createTheme.newTheme}
+      </Headline>
+      <TextInput
+        value={value}
+        placeholder="Enter Name"
+        placeholderTextColor={colors.grey}
+        onChangeText={text => onChangeText(text)}
+        style={styles.input}
+      />
+      <Headline style={styles.editTitle}>
+        {strings.createTheme.themeColor}
+      </Headline>
+      <View style={{ flexDirection: 'row' }}>
+        <Text style={styles.modalTaskText}>{newColor}</Text>
+        <TouchableOpacity onPress={showColorPicker}>
+          <View
+            style={{
+              width: 40,
+              height: 40,
+              marginLeft: 10,
+              borderWidth: 2,
+              borderColor: colors.black,
+              backgroundColor: newColor,
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+      <ModalButton
+        loader={loader}
+        onPress={onCreateTheme}
+        label={strings.button.create}
+      />
+    </Modal>
+  </Portal>
 );
 
 CreateTheme.propTypes = {

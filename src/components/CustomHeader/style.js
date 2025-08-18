@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {colors} from '../../resources';
+import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { colors } from '../../resources';
 
 export default StyleSheet.create({
   headerStyle: {
-    marginTop: RFValue(20),
+    marginTop: RFValue(10),
     marginHorizontal: RFValue(20),
     flexDirection: 'row',
     alignItems: 'center',

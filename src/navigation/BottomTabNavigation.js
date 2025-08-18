@@ -1,36 +1,35 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors } from '../resources';
 import { DashboardWrapper } from '../screens/dashboard';
 import { JournalWrapper } from '../screens/journal';
-import { SettingWrapper } from '../screens/setting';
 import { NutritionWrapper } from '../screens/nutrition';
-import CalendarNavigation from './CalendarNavigation';
 import { RecreationWrapper } from '../screens/recreation';
-import { colors } from '../resources';
+import { SettingWrapper } from '../screens/setting';
+import CalendarNavigation from './CalendarNavigation';
 
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabNavigation() {
+  const insets = useSafeAreaInsets();
   return (
     <Tab.Navigator
       lazy={false}
       initialRouteName="Calendar"
-      screenOptions={{ headerShown: false }}
-      tabBarOptions={{
-        activeTintColor: colors.icon,
-        style: {
-          height: 60,
-          paddingTop: 5,
-          paddingBottom: 5,
-          borderTopWidth: 0,
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: colors.lightGreen,
+        tabBarStyle: {
+          borderTopWidth: 1,
           backgroundColor: colors.background,
         },
-        labelStyle: {
+        tabBarLabelStyle: {
           fontSize: RFValue(8),
+          marginTop: 3,
         },
       }}
     >

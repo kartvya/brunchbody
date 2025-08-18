@@ -1,27 +1,27 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import {Text, View, SafeAreaView, ScrollView} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
-import {useNavigation} from '@react-navigation/native';
-import {RFValue} from 'react-native-responsive-fontsize';
+import { ScrollView, Text, View } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import CalorieCalculation from './CalorieCalculation';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   AddButton,
-  CustomOptions,
-  TopTabs,
-  CustomModal,
-  PermissionModal,
-  CreateItemContent,
-  ColorPickerContent,
-  NutritionItems,
   CalculationContent,
+  ColorPickerContent,
+  CreateItemContent,
+  CustomModal,
+  CustomOptions,
+  NutritionItems,
+  PermissionModal,
+  TopTabs,
 } from '../../../components';
-import {colors} from '../../../resources';
+import { colors } from '../../../resources';
+import CalorieCalculation from './CalorieCalculation';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Nutrition(props) {
   const navigation = useNavigation();
@@ -91,8 +91,11 @@ export default function Nutrition(props) {
   ];
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1, flex: 1 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.headingView}>
           <Text style={styles.headingText}>Nutrition</Text>
           <Text style={styles.subHeading1}>
@@ -109,7 +112,7 @@ export default function Nutrition(props) {
                 <TopTabs
                   childView={item.childView}
                   onPress={() =>
-                    onChangeHandler({name: 'tab', value: item.tab})
+                    onChangeHandler({ name: 'tab', value: item.tab })
                   }
                 />
                 {item.tab < 3 ? <View style={styles.separator} /> : null}
@@ -167,10 +170,10 @@ export default function Nutrition(props) {
             onClose={closeMealModal}
             onBtnPress={() => {
               closeMealModal();
-              navigation.navigate('Meal', {meal});
+              navigation.navigate('Meal', { meal });
             }}
             onDeleteBtnPress={() =>
-              onChangeHandler({name: 'permissionModal', value: true})
+              onChangeHandler({ name: 'permissionModal', value: true })
             }
           />
         }
@@ -189,10 +192,10 @@ export default function Nutrition(props) {
             onClose={closeSupplementModal}
             onBtnPress={() => {
               closeSupplementModal();
-              navigation.navigate('Supplement', {supplement});
+              navigation.navigate('Supplement', { supplement });
             }}
             onDeleteBtnPress={() =>
-              onChangeHandler({name: 'permissionModal', value: true})
+              onChangeHandler({ name: 'permissionModal', value: true })
             }
           />
         }
@@ -202,7 +205,7 @@ export default function Nutrition(props) {
       <CustomModal
         isVisible={createItemModal}
         onDismiss={() =>
-          onChangeHandler({name: 'createItemModal', value: false})
+          onChangeHandler({ name: 'createItemModal', value: false })
         }
         content={
           <CreateItemContent
@@ -210,12 +213,12 @@ export default function Nutrition(props) {
             color={color}
             heading={modalHeading}
             createItemFields={createItemFields}
-            onChangeText={text => onChangeTitle({name: 'title', value: text})}
+            onChangeText={text => onChangeTitle({ name: 'title', value: text })}
             openColorPicker={() =>
-              onChangeHandler({name: 'colorPickerModal', value: true})
+              onChangeHandler({ name: 'colorPickerModal', value: true })
             }
             hideModal={() =>
-              onChangeHandler({name: 'createItemModal', value: false})
+              onChangeHandler({ name: 'createItemModal', value: false })
             }
             btnTitle="Create"
             onBtnPress={onCreateItem}
@@ -227,20 +230,20 @@ export default function Nutrition(props) {
       <CustomModal
         isVisible={colorPickerModal}
         onDismiss={() =>
-          onChangeHandler({name: 'colorPickerModal', value: false})
+          onChangeHandler({ name: 'colorPickerModal', value: false })
         }
         content={
           <ColorPickerContent
             color={color}
             onChangeColor={newColor =>
-              onChangeHandler({name: 'color', value: newColor})
+              onChangeHandler({ name: 'color', value: newColor })
             }
             hideModal={() =>
-              onChangeHandler({name: 'colorPickerModal', value: false})
+              onChangeHandler({ name: 'colorPickerModal', value: false })
             }
             btnTitle="Save"
             onBtnPress={() =>
-              onChangeHandler({name: 'colorPickerModal', value: false})
+              onChangeHandler({ name: 'colorPickerModal', value: false })
             }
           />
         }
@@ -250,7 +253,7 @@ export default function Nutrition(props) {
       <CustomModal
         isVisible={permissionModal}
         onDismiss={() =>
-          onChangeHandler({name: 'permissionModal', value: false})
+          onChangeHandler({ name: 'permissionModal', value: false })
         }
         content={
           <PermissionModal
@@ -262,7 +265,7 @@ export default function Nutrition(props) {
             }
             onDone={onDonePermissionModal}
             onCancel={() =>
-              onChangeHandler({name: 'permissionModal', value: false})
+              onChangeHandler({ name: 'permissionModal', value: false })
             }
           />
         }
