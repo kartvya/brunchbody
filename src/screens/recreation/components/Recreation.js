@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Image, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {
@@ -19,6 +19,7 @@ import BodyPlans from './BodyPlans';
 import MyRoutines from './MyRoutines';
 import MyWorkout from './MyWorkout';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Recreation(props) {
   const {

@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {colors} from '../../../resources';
+import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { colors } from '../../../resources';
 
 export default StyleSheet.create({
   safeAreaView: {
     flex: 1,
+    backgroundColor: colors.background,
   },
   container: {
     flexGrow: 1,

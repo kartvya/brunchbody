@@ -68,7 +68,7 @@ export default function SupplementLogPage(props) {
   const [selectedSupplement, setSelectedSupplement] = useState({});
   const [disabled, setDisabled] = useState(true);
   const [entryName, setEntryName] = useState(
-    moment(entryData.date).format('M/DD/YYYY'),
+    moment(entryData.date, 'YYYY/MM/DD').format('M/DD/YYYY'),
   );
   const [note, setNote] = useState(entryData.note || '');
   const [deleteCheck, setDeleteCheck] = useState('');

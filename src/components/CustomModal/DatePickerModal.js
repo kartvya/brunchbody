@@ -17,6 +17,7 @@ export default function DatePickerModal(props) {
       setDate(parsedDate.getDate());
       setMonth(parsedDate.getMonth() + 1);
       setYear(parsedDate.getFullYear());
+      console.log(parsedDate.toString(), 'duyatsduyatsduatsd');
       onConfirm(parsedDate);
     } else {
       onConfirm();
@@ -29,8 +30,9 @@ export default function DatePickerModal(props) {
         <View style={styles.wheelPickerView2}>
           <DatePicker
             style={styles.wheelPickerStyle}
+            date={selectedDateStr}
             onDateChange={date => {
-              console.log(date.getDate());
+              console.log(date.getDate(), 'selectedDate');
               setSelectedDateStr(date);
             }}
             selectTextColor={colors.brightGreen}

@@ -1,22 +1,21 @@
-import React from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
 import PropTypes from 'prop-types';
+import {
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   Button,
   CustomHeader,
-  TextButton,
   CustomModal,
   PermissionModal,
+  TextButton,
 } from '../../../components';
-import {colors} from '../../../resources';
+import { colors } from '../../../resources';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function WeightLog(props) {
   const {
@@ -36,6 +35,8 @@ export default function WeightLog(props) {
     setCheck,
   } = props;
 
+  console.log(entryName, 'entryNameentryName');
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <ScrollView contentContainerStyle={styles.container}>
@@ -53,7 +54,7 @@ export default function WeightLog(props) {
             placeholder="<Date> Weight Log"
             placeholderTextColor={colors.grey}
             onChangeText={text => setEntryName(text)}
-            style={[styles.textInputStyle, {color: colors.grey}]}
+            style={[styles.textInputStyle, { color: colors.grey }]}
           />
         </View>
 

@@ -1,17 +1,12 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable no-unused-expressions */
-import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  SafeAreaView,
+  Linking,
   ScrollView,
+  Switch,
   Text,
   TouchableOpacity,
   View,
-  Switch,
-  Linking,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {
@@ -20,6 +15,7 @@ import {
   TimePickerModal,
 } from '../../../components';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Setting(props) {
   const {
@@ -47,7 +43,7 @@ export default function Setting(props) {
         <View style={styles.headingView}>
           <Text style={styles.headingText1}>Settings</Text>
         </View>
-        <View style={{paddingVertical: 10, marginHorizontal: 20}}>
+        <View style={{ paddingVertical: 10, marginHorizontal: 20 }}>
           {listing.map(item => (
             <View key={item.id} style={styles.listView}>
               <Text style={styles.textStyle1}>{item.title}</Text>
@@ -65,10 +61,11 @@ export default function Setting(props) {
                         : option.name === 'Logout'
                         ? onLogoutPermission()
                         : {};
-                    }}>
+                    }}
+                  >
                     {option.type === 'toggle' ? (
                       <Switch
-                        trackColor={{false: '#BBBBBB', true: '#0088D1'}}
+                        trackColor={{ false: '#BBBBBB', true: '#0088D1' }}
                         thumbColor="#81D3F9"
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={val => {
@@ -78,7 +75,7 @@ export default function Setting(props) {
                           });
                         }}
                         value={state[option.toggleName]}
-                        style={{marginRight: 10}}
+                        style={{ marginRight: 10 }}
                       />
                     ) : (
                       <View />
@@ -89,14 +86,15 @@ export default function Setting(props) {
                         flex: 1,
                         flexDirection: 'row',
                         alignItems: 'center',
-                      }}>
+                      }}
+                    >
                       <Text style={styles.textStyle2}>{option.name}</Text>
                       <AntDesign
                         name="right"
                         size={15}
                         style={[
                           styles.iconStyle,
-                          {display: option.screen !== '' ? 'flex' : 'none'},
+                          { display: option.screen !== '' ? 'flex' : 'none' },
                         ]}
                       />
                     </View>
@@ -113,7 +111,8 @@ export default function Setting(props) {
                           value: true,
                         });
                         setAlarmHeading(option.name);
-                      }}>
+                      }}
+                    >
                       <Feather name="clock" size={20} color="white" />
                       <Text style={styles.timeText}>{option.alarmTime}</Text>
                     </TouchableOpacity>

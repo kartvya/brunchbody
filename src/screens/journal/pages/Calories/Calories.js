@@ -95,7 +95,7 @@ export default function CaloriesPage(props) {
   const [heading, setHeading] = useState('');
   const [subText, setSubText] = useState('');
   const [entryName, setEntryName] = useState(
-    moment(entryData.date).format('M/DD/YYYY'),
+    moment(entryData.date, 'YYYY/MM/DD').format('M/DD/YYYY'),
   );
   const [note, setNote] = useState(entryData.note || '');
   const [deleteCheck, setDeleteCheck] = useState('');

@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  Text,
-  View,
   ScrollView,
-  SafeAreaView,
+  Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import {
   AddButton,
   Button,
@@ -17,15 +15,16 @@ import {
   CustomModal,
   CustomOptions,
   CustomTable,
-  SelectModalContent,
-  WheelPickerContent,
-  TextButton,
-  PermissionModal,
   Dashed,
   NutritionItems,
+  PermissionModal,
+  SelectModalContent,
+  TextButton,
+  WheelPickerContent,
 } from '../../../components';
-import {colors} from '../../../resources';
+import { colors } from '../../../resources';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SupplementLog(props) {
   const {
@@ -95,7 +94,7 @@ export default function SupplementLog(props) {
             placeholder="<Date> Supplement Log"
             placeholderTextColor={colors.grey}
             onChangeText={text => setEntryName(text)}
-            style={[styles.textInputStyle, {color: colors.grey}]}
+            style={[styles.textInputStyle, { color: colors.grey }]}
           />
         </View>
 

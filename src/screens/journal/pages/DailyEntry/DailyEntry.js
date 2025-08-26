@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import {colors} from '../../../../resources';
-import {DailyEntry} from '../../components';
+import { colors } from '../../../../resources';
+import { DailyEntry } from '../../components';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -39,10 +39,15 @@ const traitOptions = [
 ];
 
 export default function DailyEntryPage(props) {
-  const {route, navigation, onCreateEntry, getAllJournalEntries, onEditEntry} =
-    props;
+  const {
+    route,
+    navigation,
+    onCreateEntry,
+    getAllJournalEntries,
+    onEditEntry,
+  } = props;
   const traitFromDirectory = route?.params?.trait;
-  const {entryData, entryId} = route.params;
+  const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [feelingRate, setFeelingRate] = useState(entryData.feelingRate || 1);
   const [isVisible, setIsVisible] = useState(false);
@@ -54,7 +59,7 @@ export default function DailyEntryPage(props) {
   const [permissionModal, setPermissionModal] = useState(false);
   const [selectedTraits, setSelectedTraits] = useState(entryData.traits || []);
   const [entryName, setEntryName] = useState(
-    moment(entryData.date).format('M/DD/YYYY'),
+    moment(entryData.date, 'YYYY/MM/DD').format('M/DD/YYYY'),
   );
   const [task, setTask] = useState(entryData.task || '');
   const [thought, setThought] = useState(entryData.thought || '');
@@ -144,7 +149,9 @@ export default function DailyEntryPage(props) {
   const onSaveHandler = async () => {
     setLoader(true);
     let response = null;
-    const d = new Date(entryData.date);
+    // Replace slashes with dashes for consistent date parsing
+    const d = new Date(entryData.date.replace(/\//g, '-'));
+    console.log(d.toString(), 'fiuasdfiasdgfjasgdf', entryData.date);
     d.setHours(0, 0, 0, 0);
 
     if (d.getTime() > new Date().getTime()) {

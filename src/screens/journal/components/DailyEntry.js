@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {Text, View, ScrollView, SafeAreaView, TextInput} from 'react-native';
+import { Text, View, ScrollView, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import {
   AddButton,
   Button,
@@ -16,8 +16,9 @@ import {
   PermissionModal,
   TextButton,
 } from '../../../components';
-import {colors, strings} from '../../../resources';
+import { colors, strings } from '../../../resources';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function DailyEntry(props) {
   const navigation = useNavigation();
@@ -80,7 +81,7 @@ export default function DailyEntry(props) {
             placeholder="<Date> Daily Entry"
             placeholderTextColor={colors.grey}
             onChangeText={text => setEntryName(text)}
-            style={[styles.textInputStyle, {color: colors.grey}]}
+            style={[styles.textInputStyle, { color: colors.grey }]}
           />
         </View>
 

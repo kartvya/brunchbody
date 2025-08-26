@@ -1,25 +1,24 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  Text,
-  View,
   ScrollView,
-  SafeAreaView,
+  Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import PropTypes from 'prop-types';
-import {colors} from '../../../resources';
-import styles from './style';
 import {
   Button,
   CustomHeader,
-  CustomTextArea,
   CustomModal,
+  CustomTextArea,
   PermissionModal,
   TextButton,
 } from '../../../components';
+import { colors } from '../../../resources';
+import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function WeeklyEntry(props) {
   const {
@@ -57,7 +56,7 @@ export default function WeeklyEntry(props) {
             placeholder="<Date> Weekly Entry"
             placeholderTextColor={colors.grey}
             onChangeText={text => setEntryName(text)}
-            style={[styles.textInputStyle, {color: colors.grey}]}
+            style={[styles.textInputStyle, { color: colors.grey }]}
           />
         </View>
 

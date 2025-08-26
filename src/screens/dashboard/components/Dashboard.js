@@ -1,14 +1,12 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { SafeAreaView, View, Text } from 'react-native';
 import PropTypes from 'prop-types';
+import { Text, View } from 'react-native';
 import { CustomTopTabs } from '../../../components';
 import Day from './Day';
-import Week from './Week';
 import Month from './Month';
+import Week from './Week';
 import Year from './Year';
 import style from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Dashboard(props) {
   const { tabs, selectedTab } = props;

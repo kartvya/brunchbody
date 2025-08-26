@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import {connect, useDispatch} from 'react-redux';
+import React, { useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {WeightLog} from '../../components';
+import { WeightLog } from '../../components';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -12,13 +12,18 @@ import {
 
 export default function WeightLogPage(props) {
   const dispatch = useDispatch();
-  const {route, navigation, onCreateEntry, getAllJournalEntries, onEditEntry} =
-    props;
-  const {entryData, entryId} = route.params;
+  const {
+    route,
+    navigation,
+    onCreateEntry,
+    getAllJournalEntries,
+    onEditEntry,
+  } = props;
+  const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [permissionModal, setPermissionModal] = useState(false);
   const [entryName, setEntryName] = useState(
-    moment(entryData.date).format('M/DD/YYYY'),
+    moment(entryData.date, 'YYYY/MM/DD').format('M/DD/YYYY'),
   );
   const [weight, setWeight] = useState(entryData.weight || 0);
   const [note, setNote] = useState(entryData.note || '');

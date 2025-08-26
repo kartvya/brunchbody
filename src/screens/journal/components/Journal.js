@@ -1,23 +1,21 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import PropTypes from 'prop-types';
 import {
   ActivityIndicator,
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import PropTypes from 'prop-types';
-import styles from './style';
 import {
   CustomModal,
   DatePickerModal,
   ModalContent,
   PermissionModal,
 } from '../../../components';
-import {colors} from '../../../resources';
+import { colors } from '../../../resources';
+import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Journal(props) {
   const {
@@ -64,7 +62,8 @@ export default function Journal(props) {
             activeOpacity={0.5}
             onPress={() => {
               setDatePickerModal(true);
-            }}>
+            }}
+          >
             <Text style={styles.dateText}>
               {isDateSelected
                 ? `${month}/${date}/${year}`
@@ -103,10 +102,11 @@ export default function Journal(props) {
                           date: `${year}/${month}/${date}`,
                           entryId,
                         }
-                      : {...item, date: `${year}/${month}/${date}`},
+                      : { ...item, date: `${year}/${month}/${date}` },
                   );
                   setIsVisible(true);
-                }}>
+                }}
+              >
                 {journalEntries?.[item.title] &&
                 !journalEntries?.[item.title].isDeleted ? (
                   <Text style={styles.textStyle2}>

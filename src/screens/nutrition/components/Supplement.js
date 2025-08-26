@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import {Text, View, SafeAreaView, ScrollView} from 'react-native';
 import PropTypes from 'prop-types';
+import { ScrollView, Text, View } from 'react-native';
 import {
   AddButton,
+  CreateItemContent,
   CustomHeader,
   CustomModal,
   CustomTable,
-  CreateItemContent,
-  WheelPickerContent,
   PermissionModal,
+  WheelPickerContent,
 } from '../../../components';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Supplement(props) {
   const {
@@ -40,7 +40,7 @@ export default function Supplement(props) {
     deleteLoader,
     setCheck,
   } = props;
-  const {supplement} = route.params;
+  const { supplement } = route.params;
 
   return (
     <SafeAreaView style={styles.safeAreaView}>

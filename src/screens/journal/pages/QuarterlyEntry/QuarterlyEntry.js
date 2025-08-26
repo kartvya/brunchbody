@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import {strings} from '../../../../resources';
-import {QuarterlyEntry} from '../../components';
+import { strings } from '../../../../resources';
+import { QuarterlyEntry } from '../../components';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -78,13 +78,18 @@ const questions = [
 ];
 
 export default function QuarterlyEntryPage(props) {
-  const {route, navigation, onCreateEntry, getAllJournalEntries, onEditEntry} =
-    props;
-  const {entryData, entryId} = route.params;
+  const {
+    route,
+    navigation,
+    onCreateEntry,
+    getAllJournalEntries,
+    onEditEntry,
+  } = props;
+  const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [permissionModal, setPermissionModal] = useState(false);
   const [entryName, setEntryName] = useState(
-    moment(entryData.date).format('M/DD/YYYY'),
+    moment(entryData.date, 'YYYY/MM/DD').format('M/DD/YYYY'),
   );
   const [presenceThoughts, setPresenceThoughts] = useState(
     entryData.presenceThoughts || '',

@@ -1,16 +1,14 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-use-before-define */
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import moment from 'moment';
-import { Journal } from '../../components';
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import {
   editJournalEntry,
   getJournalEntries,
   getTraits,
 } from '../../../../redux/actions';
+import { Journal } from '../../components';
+import { useTodayKey } from '../../../../context/DateProvider';
 
 const listData = [
   {
@@ -60,21 +58,40 @@ const listData = [
 let yearsList = [];
 
 export default function JournalPage(props) {
-  const { navigation, getAllJournalEntries, onEditEntry, getAllTraits } = props;
+  const {
+    navigation,
+    getAllJournalEntries,
+    onEditEntry,
+    getAllTraits,
+    journalEntries,
+  } = props;
+  const {
+    today,
+    date,
+    month,
+    year,
+    todoListDate,
+    setDate,
+    setMonth,
+    setYear,
+    setTodoListDate,
+    resetToToday,
+  } = useTodayKey();
   const [loader, setLoader] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [pageDetail, setPageDetail] = useState({});
   const [permissionModal, setPermissionModal] = useState(false);
   const [datePickerModal, setDatePickerModal] = useState(false);
   const [isDateSelected, setIsDateSelected] = useState(false);
-  const [date, setDate] = useState(new Date().getDate());
-  const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [year, setYear] = useState(new Date().getFullYear());
   const [daysInMonth, setDaysInMonth] = useState(0);
 
   useEffect(() => {
+    const selectedDate = `${year}/${month}/${date}`;
+    getAllEntries(moment(selectedDate, 'YYYY/M/D').format());
+  }, [journalEntries]);
+
+  useEffect(() => {
     getDaysInMonth(new Date().getMonth() + 1);
-    getAllEntries(new Date());
     // getAllTraits();
 
     yearsList = [];
@@ -95,11 +112,6 @@ export default function JournalPage(props) {
     setLoader(true);
     const d = new Date(JEDate);
     d.setHours(0, 0, 0, 0);
-
-    setDate(d.getDate());
-    setMonth(d.getMonth() + 1);
-    setYear(d.getFullYear());
-
     getDaysInMonth(d.getMonth() + 1);
     await getAllJournalEntries(d.getTime());
     setLoader(false);
@@ -107,39 +119,30 @@ export default function JournalPage(props) {
 
   const incrementDate = () => {
     setIsDateSelected(true);
-
-    const currentDayInMilli = new Date(
-      moment(`${year}/${month}/${date}`),
-    ).getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    const nextDayInMilli = currentDayInMilli + oneDay;
-    const nextDate = new Date(nextDayInMilli);
-
-    getAllEntries(nextDate);
+    const current = new Date(year, month - 1, date);
+    const prev = new Date(current);
+    prev.setDate(current.getDate() + 1);
+    setDate(prev.getDate());
+    setMonth(prev.getMonth() + 1);
+    setYear(prev.getFullYear());
+    getAllEntries(prev);
   };
 
   const decrementDate = () => {
     setIsDateSelected(true);
-
-    const currentDayInMilli = new Date(
-      moment(`${year}/${month}/${date}`),
-    ).getTime();
-    const oneDay = 1000 * 60 * 60 * 24;
-    const previousDayInMilli = currentDayInMilli - oneDay;
-    const previousDate = new Date(previousDayInMilli);
-
-    getAllEntries(previousDate);
+    const current = new Date(year, month - 1, date);
+    const prev = new Date(current);
+    prev.setDate(current.getDate() - 1);
+    setDate(prev.getDate());
+    setMonth(prev.getMonth() + 1);
+    setYear(prev.getFullYear());
+    getAllEntries(prev);
   };
 
-  const onConfirmDatePicker = () => {
+  const onConfirmDatePicker = parcedDate => {
     setIsDateSelected(true);
     setDatePickerModal(false);
-
-    const currentDayInMilli = new Date(
-      moment(`${year}/${month}/${date}`),
-    ).getTime();
-
-    getAllEntries(currentDayInMilli);
+    getAllEntries(parcedDate);
   };
 
   const onCancelDatePicker = () => {
@@ -206,6 +209,7 @@ export default function JournalPage(props) {
       onConfirmDatePicker={onConfirmDatePicker}
       onCancelDatePicker={onCancelDatePicker}
       daysInMonth={daysInMonth}
+      journalEntries={journalEntries}
     />
   );
 }

@@ -1,11 +1,11 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import moment from 'moment';
-import {strings} from '../../../../resources';
-import {WeeklyEntry} from '../../components';
+import { strings } from '../../../../resources';
+import { WeeklyEntry } from '../../components';
 import {
   addJournalEntry,
   editJournalEntry,
@@ -62,13 +62,18 @@ const questions = [
 ];
 
 export default function WeeklyEntryPage(props) {
-  const {route, navigation, onCreateEntry, getAllJournalEntries, onEditEntry} =
-    props;
-  const {entryData, entryId} = route.params;
+  const {
+    route,
+    navigation,
+    onCreateEntry,
+    getAllJournalEntries,
+    onEditEntry,
+  } = props;
+  const { entryData, entryId } = route.params;
   const [loader, setLoader] = useState(false);
   const [permissionModal, setPermissionModal] = useState(false);
   const [entryName, setEntryName] = useState(
-    moment(entryData.date).format('M/DD/YYYY'),
+    moment(entryData.date, 'YYYY/MM/DD').format('M/DD/YYYY'),
   );
   const [effectiveness, setEffectiveness] = useState(
     entryData.effectiveness || 1,

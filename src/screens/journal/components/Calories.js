@@ -1,30 +1,29 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  Text,
-  View,
-  SafeAreaView,
   ScrollView,
+  Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
-import PropTypes from 'prop-types';
 import {
   AddButton,
   Button,
   CreateItemContent,
   CustomHeader,
   CustomModal,
-  SelectModalContent,
-  TextButton,
-  PermissionModal,
   Dashed,
   NutritionItems,
+  PermissionModal,
   ProgramDetailModal,
+  SelectModalContent,
+  TextButton,
 } from '../../../components';
-import {colors} from '../../../resources';
+import { colors } from '../../../resources';
 import styles from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Calories(props) {
   const {
@@ -105,7 +104,7 @@ export default function Calories(props) {
             placeholder="<Date> Calories In / Out"
             placeholderTextColor={colors.grey}
             onChangeText={text => setEntryName(text)}
-            style={[styles.textInputStyle, {color: colors.grey}]}
+            style={[styles.textInputStyle, { color: colors.grey }]}
           />
         </View>
 
@@ -136,7 +135,7 @@ export default function Calories(props) {
                     value={item.value}
                     placeholder="<Autofill>"
                     placeholderTextColor={colors.grey}
-                    style={[styles.textInputStyle, {textAlign: 'center'}]}
+                    style={[styles.textInputStyle, { textAlign: 'center' }]}
                   />
                   <View style={styles.setMargin2}>
                     <Text style={styles.contentStyle}>
@@ -156,7 +155,7 @@ export default function Calories(props) {
                 title={item.name}
                 onPress={() => onPressSelectedMeal(item)}
                 titleStyle={styles.btnTitle}
-                style={[styles.btnStyle2, {backgroundColor: item.color}]}
+                style={[styles.btnStyle2, { backgroundColor: item.color }]}
               />
               <View style={styles.flexRowView}>
                 {/* {item.options.map(i => (
@@ -201,7 +200,8 @@ export default function Calories(props) {
             <View key={item.id} style={styles.flexRowView2}>
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => onCompletedWorkoutPress(item, index)}>
+                onPress={() => onCompletedWorkoutPress(item, index)}
+              >
                 <Text style={styles.contentStyle2}>{item.name}</Text>
               </TouchableOpacity>
               <Text style={styles.boldText}>{item.totalCal}</Text>

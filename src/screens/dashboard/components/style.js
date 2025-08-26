@@ -16,7 +16,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   headingView: {
-    marginTop: RFValue(10),
+    // marginTop: RFValue(10),
     alignSelf: 'center',
   },
   headingText1: {

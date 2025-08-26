@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {colors} from '../../../resources';
+import { StyleSheet } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import { colors } from '../../../resources';
 
 export default StyleSheet.create({
   safeAreaView: {
@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   container: {
     flexGrow: 1,
-    paddingBottom: RFValue(20),
+    // paddingBottom: RFValue(20),
     backgroundColor: colors.background,
   },
 
@@ -64,7 +64,6 @@ export default StyleSheet.create({
     backgroundColor: colors.nonEditableOverlays,
   },
   headingView: {
-    marginTop: RFValue(10),
     alignSelf: 'center',
   },
   headingText1: {

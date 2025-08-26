@@ -7,12 +7,7 @@ import styles from './style';
 import { colors } from '../../resources';
 
 export default function WheelPickerContent(props) {
-  const {
-    onConfirm,
-    onCancel,
-    pickerItems,
-    onValueChange,
-  } = props;
+  const { onConfirm, onCancel, pickerItems, onValueChange } = props;
 
   // Always use an array of strings for Picker
   const data = Array.isArray(pickerItems)
@@ -31,7 +26,7 @@ export default function WheelPickerContent(props) {
   return (
     <>
       <View style={styles.wheelPickerContainer}>
-        <View style={[styles.wheelPickerView2,{alignItems:'center'}]}>
+        <View style={[styles.wheelPickerView2, { alignItems: 'center' }]}>
           {data.length > 0 ? (
             <Picker
               style={{
@@ -49,7 +44,9 @@ export default function WheelPickerContent(props) {
               selectTextColor={colors.brightGreen}
             />
           ) : (
-            <Text style={{ color: colors.white, textAlign: 'center' }}>No options</Text>
+            <Text style={{ color: colors.white, textAlign: 'center' }}>
+              No options
+            </Text>
           )}
         </View>
 
@@ -58,7 +55,10 @@ export default function WheelPickerContent(props) {
           style={styles.pickerBtnsView}
           onPress={() => {
             if (data.length > 0) {
-              onValueChange(selectedValue);
+              // Call onValueChange with a 1-based index to match callers that
+              // expect an index and access pickerItems[index - 1].value
+              const idx = data.indexOf(selectedValue);
+              onValueChange(idx >= 0 ? idx + 1 : 1);
             }
             onConfirm();
           }}

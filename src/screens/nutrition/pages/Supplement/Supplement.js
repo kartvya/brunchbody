@@ -1,14 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { connect } from 'react-redux';
-import { Supplement } from '../../components';
-import { wheelPickerItems } from '../../../../resources';
 import {
   addSupplementItems,
   deleteSupplementItem,
   editSupplementItem,
 } from '../../../../redux/actions';
+import { wheelPickerItems } from '../../../../resources';
+import { Supplement } from '../../components';
 
 const createItemFields = [
   {
