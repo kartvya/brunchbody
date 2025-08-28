@@ -6,6 +6,7 @@ import {
   CustomModal,
   Dashed,
   PermissionModal,
+  SafeAreaWrapper,
   TimePickerModal,
 } from '../../../components';
 import { colors, wheelPickerItems } from '../../../resources';
@@ -14,7 +15,6 @@ import EditEvent from './EditEvent';
 import Itinerary from './Itinerary';
 import TimeBlock from './TimeBlock';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function NewDay(props) {
   const {
@@ -65,7 +65,7 @@ export default function NewDay(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper style={styles.safeAreaView}>
       <ScrollView contentContainerStyle={styles.scrollView}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -178,7 +178,7 @@ export default function NewDay(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

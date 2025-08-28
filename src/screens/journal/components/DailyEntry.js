@@ -15,10 +15,10 @@ import {
   SelectModalContent,
   PermissionModal,
   TextButton,
+  SafeAreaWrapper,
 } from '../../../components';
 import { colors, strings } from '../../../resources';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function DailyEntry(props) {
   const navigation = useNavigation();
@@ -65,7 +65,7 @@ export default function DailyEntry(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -218,7 +218,7 @@ export default function DailyEntry(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

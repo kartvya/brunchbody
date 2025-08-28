@@ -20,10 +20,10 @@ import {
   ProgramDetailModal,
   SelectModalContent,
   TextButton,
+  SafeAreaWrapper,
 } from '../../../components';
 import { colors } from '../../../resources';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Calories(props) {
   const {
@@ -88,7 +88,7 @@ export default function Calories(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -432,7 +432,7 @@ export default function Calories(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

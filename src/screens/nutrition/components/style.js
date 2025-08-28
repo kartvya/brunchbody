@@ -3,13 +3,8 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {colors} from '../../../resources';
 
 export default StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
   container: {
     flexGrow: 1,
-    paddingBottom: RFValue(20),
-    backgroundColor: colors.background,
   },
   headingView: {
     marginTop: RFValue(10),

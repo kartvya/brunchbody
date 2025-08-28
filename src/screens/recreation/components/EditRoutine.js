@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Text,
   View,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -15,6 +14,7 @@ import {
   CustomModal,
   ModalContent,
   PermissionModal,
+  SafeAreaWrapper,
 } from '../../../components';
 import {colors} from '../../../resources';
 import styles from './style';
@@ -46,7 +46,7 @@ export default function EditRoutine(props) {
   const {selectedItem} = route.params;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -155,7 +155,7 @@ export default function EditRoutine(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

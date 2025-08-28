@@ -1,18 +1,17 @@
 import PropTypes from 'prop-types';
 import { Text, View } from 'react-native';
-import { CustomTopTabs } from '../../../components';
+import { CustomTopTabs, SafeAreaWrapper } from '../../../components';
 import Day from './Day';
 import Month from './Month';
 import Week from './Week';
 import Year from './Year';
 import style from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Dashboard(props) {
   const { tabs, selectedTab } = props;
 
   return (
-    <SafeAreaView style={style.safeAreaView}>
+    <SafeAreaWrapper>
       <View style={style.headingView}>
         <Text style={style.headingText1}>Dashboard</Text>
       </View>
@@ -30,7 +29,7 @@ export default function Dashboard(props) {
       ) : (
         <Year {...props} />
       )}
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

@@ -13,10 +13,10 @@ import {
   CustomTextArea,
   PermissionModal,
   TextButton,
-} from '../../../components';
+  SafeAreaWrapper,
+  } from '../../../components';
 import { colors } from '../../../resources';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function QuarterlyEntry(props) {
   const {
@@ -35,7 +35,7 @@ export default function QuarterlyEntry(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -103,7 +103,7 @@ export default function QuarterlyEntry(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

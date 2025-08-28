@@ -1,51 +1,39 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable array-callback-return */
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
-import { connect, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
 import moment from 'moment';
-import { colors, strings, wheelPickerItems } from '../../../../resources';
-import CalendarUI from '../../components';
-import Todo from '../../components/Todo';
-import Writing from '../../components/Writing';
-import EditTask from '../../components/EditTask';
-import EditTodo from '../../components/EditTodo';
-import CalendarMenu from '../../components/CalendarMenu';
-import MyThemes from '../../components/MyThemes';
-import CreateTheme from '../../components/CreateTheme';
-import ManageTheme from '../../components/ManageTheme';
-import Picker from '../../components/ColorPicker';
-import styles from '../../components/style';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, Text, View } from 'react-native';
+import { connect, useDispatch } from 'react-redux';
+import { AddRemoveTheme, ClearTheme, CustomModal, DatePickerModal, PermissionModal, SafeAreaWrapper, WheelPickerContent } from '../../../../components';
 import {
-  addTheme,
-  deleteTheme,
-  getThemes,
-  addTodo,
-  getTodo,
-  editTodo,
-  deleteTodo,
-  setTheme,
   addRepeatedTheme,
-  editRepeatedTheme,
+  addTheme,
+  addTodo,
   changeRepeatedTheme,
   clearCurrentTheme,
-  profile,
-  updateThemesWithFrequency,
-  getRepeatedThemes,
   clearThemeDays,
+  deleteTheme,
+  deleteTodo,
+  editRepeatedTheme,
+  editTodo,
+  getRepeatedThemes,
+  getThemes,
+  getTodo,
+  profile,
+  setTheme,
+  updateThemesWithFrequency,
 } from '../../../../redux/actions';
-import {
-  CustomModal,
-  PermissionModal,
-  AddRemoveTheme,
-  WheelPickerContent,
-  DatePickerModal,
-  ClearTheme,
-} from '../../../../components';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { colors, strings, wheelPickerItems } from '../../../../resources';
+import CalendarUI from '../../components';
+import CalendarMenu from '../../components/CalendarMenu';
+import Picker from '../../components/ColorPicker';
+import CreateTheme from '../../components/CreateTheme';
+import EditTask from '../../components/EditTask';
+import EditTodo from '../../components/EditTodo';
+import ManageTheme from '../../components/ManageTheme';
+import MyThemes from '../../components/MyThemes';
+import styles from '../../components/style';
+import Todo from '../../components/Todo';
+import Writing from '../../components/Writing';
 
 let yearsList = [];
 let totalDays = 0;
@@ -635,7 +623,7 @@ export default function CalendarPage(props) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+    <SafeAreaWrapper>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.headingView}>
           <Text style={styles.headingText}>Calendar</Text>
@@ -858,7 +846,7 @@ export default function CalendarPage(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

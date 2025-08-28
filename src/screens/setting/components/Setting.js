@@ -13,9 +13,9 @@ import {
   CustomModal,
   PermissionModal,
   TimePickerModal,
-} from '../../../components';
+  SafeAreaWrapper,
+  } from '../../../components';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Setting(props) {
   const {
@@ -38,7 +38,7 @@ export default function Setting(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.headingView}>
           <Text style={styles.headingText1}>Settings</Text>
@@ -179,7 +179,7 @@ export default function Setting(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

@@ -14,14 +14,14 @@ import PropTypes from 'prop-types';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './style';
 import {colors} from '../../../../resources';
-import {CustomHeader} from '../../../../components';
+import {CustomHeader, SafeAreaWrapper} from '../../../../components';
 
 export default function MyProfile(props) {
   const {navigation, listData, user} = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
-      <ScrollView contentContainerStyle={styles.container}>
+    <SafeAreaWrapper>
+      <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         <CustomHeader />
         <View style={styles.headingView}>
           <Text style={styles.headingText1}>My Profile</Text>
@@ -169,7 +169,7 @@ export default function MyProfile(props) {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

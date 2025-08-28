@@ -1,15 +1,16 @@
-/* eslint-disable no-unused-expressions */
-import React from 'react';
-import {SafeAreaView, ScrollView, Text, View, TextInput} from 'react-native';
+  /* eslint-disable no-unused-expressions */
 import PropTypes from 'prop-types';
+import React from 'react';
+import { ScrollView, Text, TextInput, View } from 'react-native';
 import {
-  CustomHeader,
   Button,
-  TextButton,
+  CustomHeader,
   CustomModal,
   PermissionModal,
+  SafeAreaWrapper,
+  TextButton,
 } from '../../../../components';
-import {colors} from '../../../../resources';
+import { colors } from '../../../../resources';
 import styles from './style';
 
 export default function MyPassword(props) {
@@ -37,7 +38,7 @@ export default function MyPassword(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -143,7 +144,7 @@ export default function MyPassword(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
   // }
 }

@@ -2,13 +2,12 @@ import React from 'react';
 import {
   Text,
   View,
-  SafeAreaView,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
-import {CustomHeader} from '../../../components';
+import {CustomHeader, SafeAreaWrapper} from '../../../components';
 import {colors} from '../../../resources';
 import styles from './style';
 
@@ -18,7 +17,7 @@ export default function RoutineManager(props) {
   const {selectedItem} = route.params;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader
           isEdit
@@ -41,7 +40,7 @@ export default function RoutineManager(props) {
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

@@ -11,11 +11,11 @@ import {
   CustomHeader,
   CustomModal,
   PermissionModal,
+  SafeAreaWrapper,
   TextButton,
 } from '../../../components';
 import { colors } from '../../../resources';
-import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import styles from './style'; 
 
 export default function WeightLog(props) {
   const {
@@ -38,7 +38,7 @@ export default function WeightLog(props) {
   console.log(entryName, 'entryNameentryName');
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -118,7 +118,7 @@ export default function WeightLog(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

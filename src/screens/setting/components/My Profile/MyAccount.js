@@ -10,14 +10,14 @@ import {
 import PropTypes from 'prop-types';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import styles from './style';
-import {CustomHeader} from '../../../../components';
+import {CustomHeader, SafeAreaWrapper} from '../../../../components';
 
 export default function MyAccount(props) {
   // render() {
   const {navigation, listData} = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -57,7 +57,7 @@ export default function MyAccount(props) {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
   // }
 }

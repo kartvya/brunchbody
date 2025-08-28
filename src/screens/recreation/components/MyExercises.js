@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Text,
   View,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -14,6 +13,7 @@ import {
   CustomModal,
   ModalContent,
   PermissionModal,
+  SafeAreaWrapper,
   SelectModalContent,
   WheelPickerContent,
 } from '../../../components';
@@ -58,7 +58,7 @@ export default function MyExercises(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -218,7 +218,7 @@ export default function MyExercises(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

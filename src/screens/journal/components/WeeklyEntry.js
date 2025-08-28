@@ -1,5 +1,3 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable react/jsx-props-no-spreading */
 import PropTypes from 'prop-types';
 import {
   ScrollView,
@@ -15,10 +13,10 @@ import {
   CustomTextArea,
   PermissionModal,
   TextButton,
+  SafeAreaWrapper,
 } from '../../../components';
 import { colors } from '../../../resources';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function WeeklyEntry(props) {
   const {
@@ -40,7 +38,7 @@ export default function WeeklyEntry(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -113,7 +111,7 @@ export default function WeeklyEntry(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

@@ -17,11 +17,11 @@ import {
   NutritionItems,
   PermissionModal,
   TopTabs,
+  SafeAreaWrapper,
 } from '../../../components';
 import { colors } from '../../../resources';
 import CalorieCalculation from './CalorieCalculation';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Nutrition(props) {
   const navigation = useNavigation();
@@ -91,9 +91,12 @@ export default function Nutrition(props) {
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
+    <SafeAreaWrapper>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1, flex: 1 }}
+        contentContainerStyle={{ 
+          flexGrow: 1, 
+          paddingBottom: RFValue(10)
+        }}
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.headingView}>
@@ -270,7 +273,7 @@ export default function Nutrition(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

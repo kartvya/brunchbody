@@ -19,6 +19,7 @@ import SearchBar from './SearchBar';
 import Input from './TextInput';
 import Dashed from './Dashed';
 import TextVal from './Text';
+import SafeAreaWrapper from './SafeAreaWrapper';
 import {
   CustomModal,
   ModalContent,
@@ -86,4 +87,5 @@ export {
   ClearTheme,
   AddCardioExercise,
   CustomTopTabs,
+  SafeAreaWrapper,
 };

@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -19,6 +18,7 @@ import {
   DatePickerModal,
   HeightPickerModal,
   PermissionModal,
+  SafeAreaWrapper,
 } from '../../../../components';
 
 export default function MyVitals(props) {
@@ -50,7 +50,7 @@ export default function MyVitals(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -216,7 +216,7 @@ export default function MyVitals(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

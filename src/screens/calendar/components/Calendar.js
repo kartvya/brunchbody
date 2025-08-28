@@ -15,7 +15,7 @@ export default function CalendarUI(props) {
       onDayPress={day => setTodoListDate(day.dateString)}
       theme={{
         backgroundColor: colors.secondary,
-        calendarBackground: colors.background,
+        calendarBackground: '#000000',
         textSectionTitleColor: colors.nonEditableOverlays,
         dayTextColor: colors.white,
         textDisabledColor: colors.nonEditableOverlays,

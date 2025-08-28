@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react';
-import {SafeAreaView, ScrollView, Text, View, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
-import styles from './style';
+import React from 'react';
+import { ScrollView, Text, TextInput, View } from 'react-native';
 import {
-  CustomHeader,
   Button,
+  CustomHeader,
   CustomModal,
   PermissionModal,
+  SafeAreaWrapper,
 } from '../../../../components';
-import {colors} from '../../../../resources';
+import { colors } from '../../../../resources';
+import styles from './style';
 
 export default function MyEmail(props) {
   const {
@@ -27,7 +28,7 @@ export default function MyEmail(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -84,7 +85,7 @@ export default function MyEmail(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
   // }
 }

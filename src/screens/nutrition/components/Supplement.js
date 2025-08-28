@@ -8,10 +8,10 @@ import {
   CustomModal,
   CustomTable,
   PermissionModal,
+  SafeAreaWrapper,
   WheelPickerContent,
 } from '../../../components';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Supplement(props) {
   const {
@@ -43,7 +43,7 @@ export default function Supplement(props) {
   const { supplement } = route.params;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -117,7 +117,7 @@ export default function Supplement(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

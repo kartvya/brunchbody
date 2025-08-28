@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -16,6 +15,7 @@ import {
   CustomHeader,
   CustomModal,
   PermissionModal,
+  SafeAreaWrapper,
 } from '../../../../components';
 import {colors} from '../../../../resources';
 
@@ -36,7 +36,7 @@ export default function ExportToCSV(props) {
   } = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -113,7 +113,7 @@ export default function ExportToCSV(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

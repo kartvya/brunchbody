@@ -10,6 +10,7 @@ import {
   ModalContent,
   PermissionModal,
   ProgramDetailModal,
+  SafeAreaWrapper,
   SelectModalContent,
   TopTabs,
   WheelPickerContent,
@@ -19,7 +20,6 @@ import BodyPlans from './BodyPlans';
 import MyRoutines from './MyRoutines';
 import MyWorkout from './MyWorkout';
 import styles from './style';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Recreation(props) {
   const {
@@ -123,7 +123,7 @@ export default function Recreation(props) {
   ];
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.headingView}>
           <Text style={styles.headingText}>Recreation</Text>
@@ -349,7 +349,7 @@ export default function Recreation(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

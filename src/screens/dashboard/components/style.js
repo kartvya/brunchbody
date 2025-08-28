@@ -3,20 +3,13 @@ import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { colors } from '../../../resources';
 
 export default StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
   scrollView: {
     flexGrow: 1,
-    paddingBottom: RFValue(10),
-    backgroundColor: colors.background,
   },
   text: {
     textAlign: 'center',
   },
   headingView: {
-    // marginTop: RFValue(10),
     alignSelf: 'center',
   },
   headingText1: {

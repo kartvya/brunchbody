@@ -10,7 +10,6 @@ export default StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingBottom: RFValue(20),
-    backgroundColor: colors.background,
   },
   headingView: {
     marginTop: RFValue(10),

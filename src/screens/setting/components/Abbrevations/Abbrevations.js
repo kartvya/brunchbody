@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
 import React from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
-import {CustomHeader} from '../../../../components';
+import {CustomHeader, SafeAreaWrapper} from '../../../../components';
 
 import styles from './style';
 
@@ -10,7 +10,7 @@ export default function Abbrevations(props) {
   const {abbrevationList} = props;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
         <View style={styles.headingView}>
@@ -24,7 +24,7 @@ export default function Abbrevations(props) {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
   // }
 }
