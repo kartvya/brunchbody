@@ -216,18 +216,24 @@ export default function SupplementLogPage(props) {
   const onSaveHandler = async () => {
     setLoader(true);
     let response = null;
-    const d = new Date(entryData.date);
+    // Replace slashes with dashes for consistent date parsing (matching Daily Entry)
+    const d = new Date(entryData.date.replace(/\//g, '-'));
     d.setHours(0, 0, 0, 0);
 
     if (d.getTime() > new Date().getTime()) {
       showMessage('Error!', 'You cannot enter data on future dates.');
+      setLoader(false);
+      return;
     } else if (selectedSupplements.length < 1) {
       showMessage('Error!', 'Please add atleast one supplement.');
-    } else {
+      setLoader(false);
+      return;
+    }
+
+    try {
       if (entryId) {
         response = await onEditEntry(entryId, {
           SupplementLog: {
-            // entryDate: d.getTime(),
             supplements: selectedSupplements,
             totalItems,
             note,
@@ -237,7 +243,6 @@ export default function SupplementLogPage(props) {
       } else {
         response = await onCreateEntry(d.getTime(), {
           SupplementLog: {
-            // entryDate: d.getTime(),
             supplements: selectedSupplements,
             totalItems,
             note,
@@ -251,11 +256,14 @@ export default function SupplementLogPage(props) {
         showMessage('Success!', `Entry updated successfully.`);
         await getAllJournalEntries(d.getTime());
       } else {
-        showMessage('Error!', response);
+        setLoader(false);
+        showMessage('Error!', response || 'Failed to save entry.');
       }
+    } catch (error) {
+      console.error('Save error:', error);
+      setLoader(false);
+      showMessage('Error!', 'An unexpected error occurred while saving.');
     }
-
-    setLoader(false);
   };
 
   return (

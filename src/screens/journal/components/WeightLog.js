@@ -35,8 +35,6 @@ export default function WeightLog(props) {
     setCheck,
   } = props;
 
-  console.log(entryName, 'entryNameentryName');
-
   return (
     <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>

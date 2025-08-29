@@ -38,11 +38,33 @@ const journalReducer = (state = initialState, action) => {
     }
     // To get journal entries for the current selected day.
     case GET_JOURNAL_ENTRIES: {
+      const targetDate = action.payload.date;
+      // Normalize the target date to start of day for comparison
+      const normalizedTargetDate = new Date(targetDate);
+      normalizedTargetDate.setHours(0, 0, 0, 0);
+      
+      console.log('GET_JOURNAL_ENTRIES - Looking for date:', targetDate);
+      console.log('Normalized target date:', normalizedTargetDate.getTime());
+      console.log('Current allJournalEntriesList length:', state.allJournalEntriesList.length);
+      console.log('Available entries:', state.allJournalEntriesList.map(e => ({ 
+        createdOn: e.createdOn, 
+        normalized: new Date(e.createdOn).setHours(0, 0, 0, 0),
+        type: Object.keys(e).find(key => key !== 'createdOn' && key !== 'id')
+      })));
+      
+      const foundEntry = state.allJournalEntriesList.find(entry => {
+        // Normalize the entry's createdOn date for comparison
+        const entryDate = new Date(entry.createdOn);
+        entryDate.setHours(0, 0, 0, 0);
+        
+        return entryDate.getTime() === normalizedTargetDate.getTime();
+      });
+      
+      console.log('Found entry:', foundEntry);
+      
       return {
         ...state,
-        allEntries: state.allJournalEntriesList.find(
-          i => i.createdOn === action.payload.date,
-        ),
+        allEntries: foundEntry || null,
       };
     }
     case SET_JOURNAL_ENTRY: {
@@ -52,10 +74,12 @@ const journalReducer = (state = initialState, action) => {
         createdOn: action.payload.date,
         id: Math.random().toString(36).slice(2),
       };
+      
+      console.log('SET_JOURNAL_ENTRY - Adding entry:', temp);
+      console.log('Current allJournalEntriesList length:', state.allJournalEntriesList.length);
 
       return {
         ...state,
-        // journalEntries: action.payload,
         allJournalEntriesList: [...state.allJournalEntriesList, temp],
       };
     }

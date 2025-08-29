@@ -157,16 +157,20 @@ export default function WeeklyEntryPage(props) {
   const onSaveHandler = async () => {
     setLoader(true);
     let response = null;
-    const d = new Date(entryData.date);
+    // Replace slashes with dashes for consistent date parsing (matching Daily Entry)
+    const d = new Date(entryData.date.replace(/\//g, '-'));
     d.setHours(0, 0, 0, 0);
 
     if (d.getTime() > new Date().getTime()) {
       showMessage('Error!', 'You cannot enter data on future dates.');
-    } else {
+      setLoader(false);
+      return;
+    }
+
+    try {
       if (entryId) {
         response = await onEditEntry(entryId, {
           WeeklyEntry: {
-            // entryDate: d.getTime(),
             effectiveness,
             communicationThoughts,
             focusThoughts,
@@ -179,7 +183,6 @@ export default function WeeklyEntryPage(props) {
       } else {
         response = await onCreateEntry(d.getTime(), {
           WeeklyEntry: {
-            // entryDate: d.getTime(),
             effectiveness,
             communicationThoughts,
             focusThoughts,
@@ -196,11 +199,14 @@ export default function WeeklyEntryPage(props) {
         showMessage('Success!', 'Entry updated successfully.');
         await getAllJournalEntries(d.getTime());
       } else {
-        showMessage('Error!', response);
+        setLoader(false);
+        showMessage('Error!', response || 'Failed to save entry.');
       }
+    } catch (error) {
+      console.error('Save error:', error);
+      setLoader(false);
+      showMessage('Error!', 'An unexpected error occurred while saving.');
     }
-
-    setLoader(false);
   };
 
   return (

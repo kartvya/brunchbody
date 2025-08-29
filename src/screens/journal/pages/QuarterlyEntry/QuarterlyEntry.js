@@ -194,16 +194,20 @@ export default function QuarterlyEntryPage(props) {
   const onSaveHandler = async () => {
     setLoader(true);
     let response = null;
-    const d = new Date(entryData.date);
+    // Replace slashes with dashes for consistent date parsing (matching Daily Entry)
+    const d = new Date(entryData.date.replace(/\//g, '-'));
     d.setHours(0, 0, 0, 0);
 
     if (d.getTime() > new Date().getTime()) {
       showMessage('Error!', 'You cannot enter data on future dates.');
-    } else {
+      setLoader(false);
+      return;
+    }
+
+    try {
       if (entryId) {
         response = await onEditEntry(entryId, {
           QuarterlyEntry: {
-            // entryDate: d.getTime(),
             presenceThoughts,
             personalProjectThoughts,
             personalProjectActions,
@@ -219,7 +223,6 @@ export default function QuarterlyEntryPage(props) {
       } else {
         response = await onCreateEntry(d.getTime(), {
           QuarterlyEntry: {
-            // entryDate: d.getTime(),
             presenceThoughts,
             personalProjectThoughts,
             personalProjectActions,
@@ -239,11 +242,14 @@ export default function QuarterlyEntryPage(props) {
         showMessage('Success!', 'Entry updated successfully.');
         await getAllJournalEntries(d.getTime());
       } else {
-        showMessage('Error!', response);
+        setLoader(false);
+        showMessage('Error!', response || 'Failed to save entry.');
       }
+    } catch (error) {
+      console.error('Save error:', error);
+      setLoader(false);
+      showMessage('Error!', 'An unexpected error occurred while saving.');
     }
-
-    setLoader(false);
   };
 
   return (
