@@ -21,6 +21,7 @@ import {
   SET_SUPPLEMENT_ITEMS,
 } from '../constants';
 import {serverUrl} from '../../config';
+import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
 
 export const getMeals = () => async dispatch => {
   const idToken = await AsyncStorage.getItem('auth_token');
@@ -489,6 +490,7 @@ export const getMealsDirectory = () => async dispatch => {
     .catch(err => err.response.data);
 
   if (request.success) {
+    console.log('request.result', request.result);
     dispatch({type: GET_MEALS_DIRECTORY, payload: request.result});
     return true;
   }

@@ -171,6 +171,7 @@ export default function Nutrition(props) {
             text={meal.name}
             modalItems={mealItems}
             onClose={closeMealModal}
+            showButton={true}
             onBtnPress={() => {
               closeMealModal();
               navigation.navigate('Meal', { meal });

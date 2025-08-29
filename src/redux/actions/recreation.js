@@ -203,44 +203,8 @@ export const deleteRoutineTask = data => async dispatch => {
 };
 
 export const getCustomPlans = () => async dispatch => {
-  const idToken = await AsyncStorage.getItem('auth_token');
-  const refreshToken = await AsyncStorage.getItem('refresh_token');
-  const lastUpdatedTime = await AsyncStorage.getItem('last_updated_time');
-  const lastFetchedTimeCustomPlans = await AsyncStorage.getItem(
-    'last_fetched_time_custom_plans',
-  );
-  if (
-    lastFetchedTimeCustomPlans == null ||
-    (lastUpdatedTime !== null &&
-      parseInt(lastUpdatedTime, 10) - parseInt(lastFetchedTimeCustomPlans, 10) >
-        0)
-  ) {
-    console.log(
-      'Inside getCustomPlans',
-      lastFetchedTimeCustomPlans - lastUpdatedTime,
-    );
-
-    const request = await axios({
-      method: 'GET',
-      baseURL: serverUrl,
-      url: `api/user/getCustomPlans`,
-      headers: {
-        auth_token: idToken,
-        refresh_token: refreshToken,
-      },
-    })
-      .then(res => res.data)
-      .catch(err => err.response.data);
-
-    if (request.success) {
-      dispatch({ type: GET_CUSTOM_PLANS, payload: request.result });
-      return true;
-    }
-
-    return request.result || 'Something went wrong.';
-  }
-  console.log('No new Data Found getCustomPlans');
-  return 'No new Data Found';
+  dispatch({ type: GET_CUSTOM_PLANS, payload: [] });
+  return true;
 };
 
 export const addCustomPlan = data => async dispatch => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView, ScrollView, TextInput} from 'react-native';
+import {View, Text, ScrollView, TextInput} from 'react-native';
 import PropTypes from 'prop-types';
 import {
   CustomHeader,
@@ -10,6 +10,7 @@ import {
   CustomModal,
   WheelPickerContent,
   PermissionModal,
+  SafeAreaWrapper,
 } from '../../../components';
 import styles from './style';
 import {colors, wheelPickerItems} from '../../../resources';
@@ -41,7 +42,7 @@ export default function MealDetail(props) {
   const {meal} = route.params;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -155,7 +156,7 @@ export default function MealDetail(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

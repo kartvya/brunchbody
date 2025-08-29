@@ -166,6 +166,5 @@ export default StyleSheet.create({
 
   customContainer: {
     flex: 1,
-    backgroundColor: colors.background,
   },
 });

@@ -84,7 +84,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        buildConfigField "boolean", "IS_EDGE_TO_EDGE_ENABLED", "false"
+        buildConfigField "boolean", "IS_EDGE_TO_EDGE_ENABLED", "true"
     }
     
     packagingOptions {
@@ -101,6 +101,14 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
         exclude 'META-INF/*.kotlin_module'
+        // Exclude problematic WindowUtilKt files
+        exclude '**/WindowUtilKt.dex'
+        exclude '**/WindowUtilKt.class'
+        // Add more specific exclusions for duplicate classes
+        exclude '**/com/facebook/react/views/view/WindowUtilKt.*'
+        pickFirst '**/com/facebook/react/views/view/WindowUtilKt.*'
+        // Use pickFirst for all WindowUtilKt related files
+        pickFirst '**/WindowUtilKt.*'
     }
     
     signingConfigs {
@@ -111,6 +119,31 @@ android {
             keyPassword 'android'
         }
     }
+    
+    // Add this to handle duplicate class issues
+    configurations.all {
+        resolutionStrategy {
+            force 'com.facebook.react:react-android:0.80.2'
+            // Force specific versions to avoid conflicts
+            force 'androidx.core:core-ktx:1.12.0'
+            force 'androidx.appcompat:appcompat:1.6.1'
+            // Force specific React Native versions to avoid conflicts
+            force 'com.facebook.react:react-native:0.80.2'
+        }
+    }
+    
+    // Handle duplicate classes in release builds
+    android.applicationVariants.all { variant ->
+        if (variant.buildType.name == 'release') {
+            variant.mergeAssetsProvider.configure {
+                doLast {
+                    delete(fileTree(dir: outputDir, includes: ['**/WindowUtilKt.*']))
+                }
+            }
+        }
+    }
+    
+    // Add specific configuration for release builds
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
@@ -121,22 +154,28 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            // Add specific configuration to handle duplicate classes
+            ndk {
+                abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            }
         }
     }
     
-    // Add this to handle duplicate class issues
-    configurations.all {
-        resolutionStrategy {
-            force 'com.facebook.react:react-android:0.80.2'
-        }
-    }
-    
-    // Exclude problematic classes from compilation
-    sourceSets {
-        main {
-            java {
-                exclude '**/WindowUtilKt.java'
-                exclude '**/WindowUtilKt.kt'
+    // Add specific task to handle WindowUtilKt issue
+    tasks.whenTaskAdded { task ->
+        if (task.name.contains('mergeDexRelease')) {
+            task.doFirst {
+                // Remove duplicate WindowUtilKt files before merging
+                def buildDir = new File("${project.buildDir}/intermediates/project_dex_archive/release/dexBuilderRelease/out")
+                if (buildDir.exists()) {
+                    buildDir.eachDirRecurse { dir ->
+                        dir.eachFile { file ->
+                            if (file.name.contains('WindowUtilKt')) {
+                                file.delete()
+                            }
+                        }
+                    }
+                }
             }
         }
     }

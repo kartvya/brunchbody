@@ -1,16 +1,10 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {CustomHeader, SearchBar} from '../../../components';
+import {CustomHeader, SearchBar, SafeAreaWrapper} from '../../../components';
 import {colors} from '../../../resources';
 import styles from './style';
 
@@ -22,7 +16,7 @@ export default function MealDirectory(props) {
   const {type} = route.params;
 
   return (
-    <SafeAreaView style={styles.customContainer}>
+    <SafeAreaWrapper>
       <CustomHeader />
 
       <View style={[styles.setMargin, {marginBottom: 10}]}>
@@ -84,7 +78,7 @@ export default function MealDirectory(props) {
             })}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

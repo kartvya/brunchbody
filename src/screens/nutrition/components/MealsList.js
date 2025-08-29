@@ -4,19 +4,19 @@ import PropTypes from 'prop-types';
 import {useNavigation} from '@react-navigation/native';
 import {RFValue} from 'react-native-responsive-fontsize';
 import Feather from 'react-native-vector-icons/Feather';
-import {CustomHeader, SearchBar} from '../../../components';
+import {CustomHeader, SearchBar, SafeAreaWrapper  } from '../../../components';
 import {colors} from '../../../resources';
 import styles from './style';
 
 export default function MealsList(props) {
   const navigation = useNavigation();
   const {search, setSearch, mealCategories} = props;
-
+  console.log('mealCategories', mealCategories);
   return (
-    <View style={styles.customContainer}>
+    <SafeAreaWrapper>
       <CustomHeader />
 
-      <View style={[styles.setMargin, {marginBottom: 10}]}>
+      <View style={[styles.setMargin]}>
         <SearchBar
           value={search}
           onChangeText={text => {
@@ -55,7 +55,7 @@ export default function MealsList(props) {
             ))}
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaWrapper>
   );
 }
 

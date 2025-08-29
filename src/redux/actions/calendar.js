@@ -202,30 +202,9 @@ export const getRepeatedThemes = () => async dispatch => {
 };
 
 export const addRepeatedTheme = data => async dispatch => {
-  // const idToken = await AsyncStorage.getItem('auth_token');
-  // const refreshToken = await AsyncStorage.getItem('refresh_token');
-
-  // const request = await axios({
-  //   method: 'POST',
-  //   baseURL: serverUrl,
-  //   url: 'api/user/addRepeatedTheme',
-  //   data,
-  //   headers: {
-  //     auth_token: idToken,
-  //     refresh_token: refreshToken,
-  //   },
-  // })
-  //   .then(res => res.data)
-  //   .catch(err => err.response.data);
-
-  // if (request.success) {
-  // dispatch(getRepeatedThemes());
   await dispatch({type: ADD_REPEATED_THEME, payload: data});
   await dispatch({type: SET_THEME_WITH_FREQUENCY, payload: null});
   return true;
-  // }
-
-  // return request.result || 'Something went wrong.';
 };
 
 export const editRepeatedTheme = (id, data) => async dispatch => {

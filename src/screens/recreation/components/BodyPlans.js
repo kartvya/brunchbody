@@ -1,10 +1,10 @@
-import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {RFValue} from 'react-native-responsive-fontsize';
-import {CustomText} from '../../../components';
-import {colors} from '../../../resources';
+import { CustomText } from '../../../components';
+import { colors } from '../../../resources';
 import styles from './style';
 
 export default function BodyPlans(props) {

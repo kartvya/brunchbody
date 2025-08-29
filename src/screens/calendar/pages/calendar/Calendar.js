@@ -34,6 +34,7 @@ import MyThemes from '../../components/MyThemes';
 import styles from '../../components/style';
 import Todo from '../../components/Todo';
 import Writing from '../../components/Writing';
+import { clampRGBA } from 'react-native-reanimated/lib/typescript/Colors';
 
 let yearsList = [];
 let totalDays = 0;
@@ -438,7 +439,7 @@ export default function CalendarPage(props) {
 
       const themeData = { ...selectedTheme };
       // delete selectedTheme.id;
-
+      console.log('themeData', themeData);
       const response = await onAddRepeatedTheme({
         ...themeData,
         frequency,

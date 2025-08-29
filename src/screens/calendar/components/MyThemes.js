@@ -20,12 +20,12 @@ const MyThemes = ({
       contentContainerStyle={styles.editModalContainer}
     >
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Headline style={styles.headline}>{strings.myThemes.title}</Headline>
+        <Text style={[styles.headline, { fontSize: 24, fontWeight: 'bold' }]}>{strings.myThemes.title}</Text>
         <CloseIcon onPress={hideMyTheme} />
       </View>
-      <Headline style={styles.editTitle}>
+      <Text style={[styles.editTitle, { fontSize: 20, fontWeight: '600' }]}>
         {strings.calendarMenu.select}
-      </Headline>
+      </Text>
       <RadioButton.Group
         value={checkedTheme}
         onValueChange={val => setTheme(val)}

@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import {Text, View, ScrollView, SafeAreaView} from 'react-native';
+import {Text, View, ScrollView} from 'react-native';
 import PropTypes from 'prop-types';
 import {
   CustomHeader,
@@ -9,6 +9,7 @@ import {
   CreateItemContent,
   PermissionModal,
   CustomTable,
+  SafeAreaWrapper,
 } from '../../../components';
 import styles from './style';
 
@@ -42,7 +43,7 @@ export default function Meal(props) {
   const {meal} = route.params;
 
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaWrapper>
       <ScrollView contentContainerStyle={styles.container}>
         <CustomHeader />
 
@@ -115,7 +116,7 @@ export default function Meal(props) {
           />
         }
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 }
 

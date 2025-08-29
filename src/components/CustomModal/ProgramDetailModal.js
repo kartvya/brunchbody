@@ -88,7 +88,7 @@ export default function ProgramDetailModal(props) {
         <View style={styles.bottomTextView}>
           <TextButton onPress={onDeleteBtnPress} title="Delete" />
         </View>
-      )}1
+      )}
 
       {/* {showTable ? (
         planLoader ? (

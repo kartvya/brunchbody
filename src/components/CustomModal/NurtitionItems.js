@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/forbid-prop-types */
 import React, {Fragment} from 'react';
 import {View, Text, ActivityIndicator} from 'react-native';
 import PropTypes from 'prop-types';

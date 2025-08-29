@@ -1,11 +1,10 @@
-import React from 'react';
-import {Calendar} from 'react-native-calendars';
 import PropTypes from 'prop-types';
-import {colors} from '../../../resources';
+import React from 'react';
+import { Calendar } from 'react-native-calendars';
+import { colors } from '../../../resources';
 
 export default function CalendarUI(props) {
   const {frequencyThemes, onMonthChange, setTodoListDate} = props;
-
   return (
     <Calendar
       current={new Date()}
